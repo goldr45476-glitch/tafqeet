@@ -1,12 +1,12 @@
 export const en = {
   meta: {
-    siteName: 'AdminPro Tools',
-    titleHome: 'AdminPro Tools | Smart Administrative Tools in One Place',
+    siteName: 'Tafqeit',
+    titleHome: 'Tafqeit | Smart Administrative Tools in One Place',
     descriptionHome:
       'Four professional administrative tools in one modern hub: Number to Words (Tafqeet), Date Difference, Financial Calculator, and Document Helper.',
   },
   common: {
-    appName: 'AdminPro Tools',
+    appName: 'Tafqeit',
     langSwitchAr: 'العربية',
     langSwitchEn: 'English',
     themeLight: 'Light',
@@ -243,24 +243,24 @@ export const en = {
     about: 'About',
     contact: 'Contact',
     privacyNote: 'These tools run locally in your browser whenever possible — no data is collected or sent to a server.',
-    copyright: 'Copyright © {year} AdminPro Tools. All rights reserved.',
+    copyright: 'Copyright © {year} Tafqeit. All rights reserved.',
   },
   pages: {
     about: {
-      title: 'About AdminPro Tools',
-      body: 'AdminPro Tools is a focused set of four administrative utilities — Number to Words, Date Difference, Financial Calculator, and Document Helper — built for accountants, office administrators, and business owners who need fast, accurate answers without the overhead of a full ERP system.',
+      title: 'About Tafqeit',
+      body: 'Tafqeit is a focused set of four administrative utilities — Number to Words, Date Difference, Financial Calculator, and Document Helper — built for accountants, office administrators, and business owners who need fast, accurate answers without the overhead of a full ERP system.',
     },
     privacy: {
       title: 'Privacy',
-      body: 'AdminPro Tools does not require an account and does not collect personal data. Every calculation runs entirely inside your browser. Recent Number-to-Words conversions are stored only in your browser\'s local storage so you can revisit them — they are never transmitted anywhere and you can clear them at any time.',
+      body: 'Tafqeit does not require an account and does not collect personal data. Every calculation runs entirely inside your browser. Recent Number-to-Words conversions are stored only in your browser\'s local storage so you can revisit them — they are never transmitted anywhere and you can clear them at any time.',
     },
     terms: {
       title: 'Terms of Use',
-      body: 'AdminPro Tools is provided for general administrative convenience "as is", without warranty of any kind. Document templates are general-purpose drafts, not legal or financial advice — please review generated content and consult a qualified professional before relying on it for official purposes.',
+      body: 'Tafqeit is provided for general administrative convenience "as is", without warranty of any kind. Document templates are general-purpose drafts, not legal or financial advice — please review generated content and consult a qualified professional before relying on it for official purposes.',
     },
     contact: {
       title: 'Contact',
-      body: 'Have feedback or a feature request? We would love to hear from you as this toolkit continues to grow. you can reach us at goldr45476@gmail.com.',
+      body: 'Have feedback or a feature request? We would love to hear from you as this toolkit continues to grow. You can reach us at goldr45476@gmail.com.',
     },
   },
   errors: {
