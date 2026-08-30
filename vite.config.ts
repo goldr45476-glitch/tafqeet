@@ -7,7 +7,7 @@ export default defineConfig({
     port: 5173,
   },
   build: {
-    target: 'es2019',
+    target: 'es2020',
     sourcemap: false,
   },
 });
