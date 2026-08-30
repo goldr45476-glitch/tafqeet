@@ -10,4 +10,7 @@ export default defineConfig({
     target: 'es2020',
     sourcemap: false,
   },
+  preview: {
+    allowedHosts: true,
+  },
 });
