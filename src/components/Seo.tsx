@@ -3,10 +3,10 @@ import { useLocale } from '../i18n';
 
 /** Lightweight client-side SEO: updates document title & meta description per route. */
 export default function Seo({ title, description }: { title: string; description?: string }) {
-  const { t, locale } = useLocale();
+  const { locale } = useLocale();
 
   useEffect(() => {
-    const fullTitle = `${title} | ${locale === 'ar' ? t.common.logoShortAr : t.common.logoShortEn}`;
+    const fullTitle = `${title} | ${locale === 'ar' ? 'AdminPro Tools' : 'AdminPro Tools'}`;
     document.title = fullTitle;
 
     if (description) {

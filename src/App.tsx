@@ -3,11 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import BackgroundSwitcher from './components/BackgroundSwitcher';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ToolsPage = lazy(() => import('./pages/ToolsPage'));
 const NumberToWordsPage = lazy(() => import('./pages/NumberToWordsPage'));
+const DateDifferencePage = lazy(() => import('./pages/DateDifferencePage'));
 const FinancialCalculatorPage = lazy(() => import('./pages/FinancialCalculatorPage'));
 const DocumentHelperPage = lazy(() => import('./pages/DocumentHelperPage'));
 const StaticPage = lazy(() => import('./pages/StaticPage'));
@@ -38,6 +38,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/tools/number-to-words" element={<NumberToWordsPage />} />
+            <Route path="/tools/date-difference" element={<DateDifferencePage />} />
             <Route path="/tools/financial-calculator" element={<FinancialCalculatorPage />} />
             <Route path="/tools/document-helper" element={<DocumentHelperPage />} />
             <Route path="/about" element={<StaticPage page="about" />} />
@@ -49,7 +50,6 @@ export default function App() {
         </Suspense>
       </main>
       <Footer />
-      <BackgroundSwitcher />
     </div>
   );
 }

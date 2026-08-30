@@ -10,18 +10,12 @@ export default function CopyButton({
   disabled,
   variant = 'primary',
   className = '',
-  toastMessage,
-  icon,
 }: {
   text: string;
   label?: string;
   disabled?: boolean;
   variant?: 'primary' | 'secondary';
   className?: string;
-  /** Overrides the generic "Copied successfully" toast — use for a distinct,
-   * specific confirmation (e.g. "Number copied" vs "Tafqeet copied"). */
-  toastMessage?: string;
-  icon?: React.ReactNode;
 }) {
   const { t } = useLocale();
   const { showToast } = useToast();
@@ -32,7 +26,7 @@ export default function CopyButton({
     const ok = await copyToClipboard(text);
     if (ok) {
       setJustCopied(true);
-      showToast(toastMessage ?? t.common.copied, 'success');
+      showToast(t.common.copied, 'success');
       window.setTimeout(() => setJustCopied(false), 1800);
     }
   }
@@ -47,7 +41,7 @@ export default function CopyButton({
       className={`${base} ${className}`}
       aria-live="polite"
     >
-      {justCopied ? <IconCheck className="h-4 w-4" /> : (icon ?? <IconCopy className="h-4 w-4" />)}
+      {justCopied ? <IconCheck className="h-4 w-4" /> : <IconCopy className="h-4 w-4" />}
       {label ?? t.common.copy}
     </button>
   );

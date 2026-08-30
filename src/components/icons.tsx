@@ -27,6 +27,17 @@ export const IconTafqeet = (props: IconProps) =>
     props,
   );
 
+export const IconDateDiff = (props: IconProps) =>
+  base(
+    <>
+      <rect x="3" y="4.5" width="8" height="8" rx="2" />
+      <rect x="13" y="11.5" width="8" height="8" rx="2" />
+      <path d="M7 4.5V2.5M17 11.5V9.5" />
+      <path d="M11.5 8.5l3 3" strokeDasharray="2 2.5" />
+    </>,
+    props,
+  );
+
 export const IconFinancial = (props: IconProps) =>
   base(
     <>
@@ -161,112 +172,6 @@ export const IconMail = (props: IconProps) =>
     <>
       <rect x="3" y="5.5" width="18" height="13" rx="2" />
       <path d="M4 7l8 6 8-6" />
-    </>,
-    props,
-  );
-
-export const IconPalette = (props: IconProps) =>
-  base(
-    <>
-      <path d="M12 3a9 9 0 100 18c1.1 0 1.8-.9 1.8-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.7-1.6 1.6-1.6H16a4 4 0 004-4c0-4.4-3.6-8.2-8-8.2z" />
-      <circle cx="7.5" cy="11" r="1" fill="currentColor" stroke="none" />
-      <circle cx="10.5" cy="7.5" r="1" fill="currentColor" stroke="none" />
-      <circle cx="15" cy="8" r="1" fill="currentColor" stroke="none" />
-    </>,
-    props,
-  );
-
-export const IconBold = (props: IconProps) =>
-  base(
-    <>
-      <path d="M6.5 4.5h6a3.5 3.5 0 010 7h-6z" />
-      <path d="M6.5 11.5h7a3.5 3.5 0 010 7h-7z" />
-    </>,
-    props,
-  );
-
-export const IconItalic = (props: IconProps) =>
-  base(<path d="M10 4.5h7M7 19.5h7M13.5 4.5l-3 15" />, props);
-
-export const IconUnderline = (props: IconProps) =>
-  base(
-    <>
-      <path d="M6 4.5v6a6 6 0 0012 0v-6" />
-      <path d="M5 19.5h14" />
-    </>,
-    props,
-  );
-
-export const IconAlignRight = (props: IconProps) =>
-  base(<path d="M4 5.5h16M10 10.5h10M4 15.5h16M10 20.5h10" />, props);
-
-export const IconAlignCenter = (props: IconProps) =>
-  base(<path d="M4 5.5h16M7 10.5h10M4 15.5h16M7 20.5h10" />, props);
-
-export const IconAlignLeft = (props: IconProps) =>
-  base(<path d="M4 5.5h16M4 10.5h10M4 15.5h16M4 20.5h10" />, props);
-
-export const IconAlignJustify = (props: IconProps) =>
-  base(<path d="M4 5.5h16M4 10.5h16M4 15.5h16M4 20.5h16" />, props);
-
-export const IconType = (props: IconProps) =>
-  base(
-    <>
-      <path d="M5 6.5h14M12 6.5v11" />
-      <path d="M8.5 17.5h7" />
-    </>,
-    props,
-  );
-
-export const IconLineHeight = (props: IconProps) =>
-  base(
-    <>
-      <path d="M4 5.5h6M4 12h6M4 18.5h6" />
-      <path d="M15 3.5l3 3-3 3M18 6.5H13M15 20.5l3-3-3-3M18 17.5H13" />
-    </>,
-    props,
-  );
-
-export const IconDirection = (props: IconProps) =>
-  base(
-    <>
-      <path d="M4 6.5h9M4 12h6M4 17.5h9" />
-      <path d="M17 9.5l3-3-3-3M20 6.5h-6" />
-    </>,
-    props,
-  );
-
-export const IconBookmark = (props: IconProps) =>
-  base(<path d="M6 3.5h12v17l-6-4-6 4z" />, props);
-
-export const IconUser = (props: IconProps) =>
-  base(
-    <>
-      <circle cx="12" cy="8" r="3.5" />
-      <path d="M4.5 20c1.4-3.6 4.3-5.5 7.5-5.5s6.1 1.9 7.5 5.5" />
-    </>,
-    props,
-  );
-
-export const IconBuilding = (props: IconProps) =>
-  base(
-    <>
-      <rect x="4" y="3.5" width="11" height="17" rx="1" />
-      <path d="M9 8h1M9 12h1M13 8h1M13 12h1M9 16h1M13 16h1" />
-      <path d="M15 9.5h5v11h-5" />
-    </>,
-    props,
-  );
-
-export const IconHash = (props: IconProps) =>
-  base(<path d="M9 3.5L7.5 20.5M16.5 3.5L15 20.5M4 8.5h16M3.5 15.5h16" />, props);
-
-export const IconLayoutTemplate = (props: IconProps) =>
-  base(
-    <>
-      <rect x="3.5" y="3.5" width="17" height="6" rx="1.5" />
-      <rect x="3.5" y="12.5" width="7.5" height="8" rx="1.5" />
-      <rect x="13" y="12.5" width="7.5" height="8" rx="1.5" />
     </>,
     props,
   );

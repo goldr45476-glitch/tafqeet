@@ -5,7 +5,6 @@ import App from './App';
 import { LocaleProvider } from './i18n';
 import { ThemeProvider } from './hooks/useTheme';
 import { ToastProvider } from './hooks/useToast';
-import { BackgroundProvider } from './hooks/useBackground';
 import './index.css';
 
 const rootEl = document.getElementById('root');
@@ -17,13 +16,11 @@ ReactDOM.createRoot(rootEl).render(
   <React.StrictMode>
     <ThemeProvider>
       <LocaleProvider>
-        <BackgroundProvider>
-          <ToastProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ToastProvider>
-        </BackgroundProvider>
+        <ToastProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ToastProvider>
       </LocaleProvider>
     </ThemeProvider>
   </React.StrictMode>,

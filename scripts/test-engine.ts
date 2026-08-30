@@ -32,10 +32,7 @@ const plainCases = [
 for (const c of plainCases) show('plain', c, null);
 
 console.log('\n================ IQD (3 decimals) ================\n');
-const iqdCases = [
-  '1250.750', '1', '2', '3', '10', '11', '12', '20', '21', '100', '101', '102', '110', '111', '125',
-  '0', '0.750', '0.001', '1000.005', '999999999.99',
-];
+const iqdCases = ['1250.750', '1', '2', '3', '10', '11', '100', '0', '0.750', '0.001', '1000.005', '999999999.99'];
 for (const c of iqdCases) show('IQD', c, 'IQD');
 
 console.log('\n================ USD (2 decimals) ================\n');

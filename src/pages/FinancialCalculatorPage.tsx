@@ -3,7 +3,6 @@ import { useLocale } from '../i18n';
 import Seo from '../components/Seo';
 import BackgroundDecor from '../components/BackgroundDecor';
 import PageHeader from '../components/PageHeader';
-import CopyButton from '../components/CopyButton';
 import {
   decreaseByPercent,
   increaseByPercent,
@@ -13,7 +12,6 @@ import {
   vatForward,
   vatReverse,
 } from '../utils/financialUtils';
-import { CURRENCIES, DEFAULT_CURRENCY_CODE, convertNumberToWords } from '../utils/numberToWordsEngine';
 import { IconFinancial } from '../components/icons';
 
 type Tab = 'percentage' | 'vat' | 'profit';
@@ -30,7 +28,6 @@ function fmt(n: number, locale: string): string {
   return n.toLocaleString(locale === 'ar' ? 'ar-EG' : 'en-US', { maximumFractionDigits: 4 });
 }
 
-/** A non-monetary result (a percentage, a ratio) — no currency, no Tafqeet. */
 function ResultTile({ label, value, highlight = false }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div
@@ -50,168 +47,8 @@ function ResultTile({ label, value, highlight = false }: { label: string; value:
   );
 }
 
-/**
- * A monetary result: the formatted amount, a smaller "mini-Tafqeet" line
- * underneath written out in the selected currency, and its own independent
- * Copy Result / Copy Tafqeet controls — every important money figure gets
- * this treatment, not just the headline one.
- */
-function AmountResultTile({
-  label,
-  amount,
-  currencyCode,
-  highlight = false,
-}: {
-  label: string;
-  amount: number;
-  currencyCode: string;
-  highlight?: boolean;
-}) {
+function PercentagePanel() {
   const { t, locale } = useLocale();
-  const numberText = fmt(amount, locale);
-  const outcome = convertNumberToWords({
-    rawValue: amount.toFixed(6),
-    currencyCode,
-    includeSubunit: true,
-    addOnly: false,
-  });
-  const words = outcome.success ? (locale === 'ar' ? outcome.wordsAr : outcome.wordsEn) : '';
-
-  return (
-    <div
-      className={`rounded-2xl border p-5 text-center shadow-sm ${
-        highlight
-          ? 'border-brand-200 bg-gradient-to-br from-brand-50 to-accent-50 dark:border-brand-800/50 dark:from-brand-500/10 dark:to-accent-500/10'
-          : 'border-white/70 bg-white/70 dark:border-white/10 dark:bg-white/5'
-      }`}
-    >
-      <p
-        dir="ltr"
-        className={`text-2xl font-bold ${highlight ? 'text-brand-700 dark:text-brand-300' : 'text-slate-800 dark:text-slate-100'}`}
-      >
-        {numberText}
-      </p>
-      <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
-
-      {words && (
-        <p
-          dir={locale === 'ar' ? 'rtl' : 'ltr'}
-          className="mt-3 border-t border-slate-200/70 pt-3 text-[11px] leading-5 text-slate-500 dark:border-white/10 dark:text-slate-400"
-        >
-          <span className="font-semibold text-brand-600 dark:text-brand-400">{t.financial.tafqeetLabel}: </span>
-          {words}
-        </p>
-      )}
-
-      <div className="no-print mt-3 flex flex-wrap items-center justify-center gap-1.5">
-        <CopyButton
-          text={numberText}
-          label={t.common.copyResult}
-          toastMessage={t.common.copiedResult}
-          variant="secondary"
-          className="!px-2.5 !py-1 text-[11px]"
-        />
-        <CopyButton
-          text={words}
-          label={t.common.copyTafqeet}
-          toastMessage={t.common.copiedTafqeet}
-          variant="secondary"
-          className="!px-2.5 !py-1 text-[11px]"
-          disabled={!words}
-        />
-      </div>
-    </div>
-  );
-}
-
-/**
- * A percentage-only result (a ratio, a margin, a rate of change) — no
- * currency involved, but still gets its own mini-Tafqeet line (as a plain
- * number, e.g. "خمسة عشر فاصلة خمسة") and its own Copy Result / Copy
- * Tafqeet controls, exactly like AmountResultTile does for monetary values.
- */
-function PercentResultTile({ label, value, highlight = false }: { label: string; value: number; highlight?: boolean }) {
-  const { t, locale } = useLocale();
-  const valueText = `${fmt(value, locale)}%`;
-  const outcome = convertNumberToWords({
-    rawValue: Math.abs(value).toFixed(4),
-    currencyCode: null,
-    addOnly: false,
-  });
-  const words = outcome.success ? (locale === 'ar' ? outcome.wordsAr : outcome.wordsEn) : '';
-
-  return (
-    <div
-      className={`rounded-2xl border p-5 text-center shadow-sm ${
-        highlight
-          ? 'border-brand-200 bg-gradient-to-br from-brand-50 to-accent-50 dark:border-brand-800/50 dark:from-brand-500/10 dark:to-accent-500/10'
-          : 'border-white/70 bg-white/70 dark:border-white/10 dark:bg-white/5'
-      }`}
-    >
-      <p
-        dir="ltr"
-        className={`text-2xl font-bold ${highlight ? 'text-brand-700 dark:text-brand-300' : 'text-slate-800 dark:text-slate-100'}`}
-      >
-        {valueText}
-      </p>
-      <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
-
-      {words && (
-        <p
-          dir={locale === 'ar' ? 'rtl' : 'ltr'}
-          className="mt-3 border-t border-slate-200/70 pt-3 text-[11px] leading-5 text-slate-500 dark:border-white/10 dark:text-slate-400"
-        >
-          <span className="font-semibold text-brand-600 dark:text-brand-400">{t.financial.tafqeetLabel}: </span>
-          {words}
-        </p>
-      )}
-
-      <div className="no-print mt-3 flex flex-wrap items-center justify-center gap-1.5">
-        <CopyButton
-          text={valueText}
-          label={t.common.copyResult}
-          toastMessage={t.common.copiedResult}
-          variant="secondary"
-          className="!px-2.5 !py-1 text-[11px]"
-        />
-        <CopyButton
-          text={words}
-          label={t.common.copyTafqeet}
-          toastMessage={t.common.copiedTafqeet}
-          variant="secondary"
-          className="!px-2.5 !py-1 text-[11px]"
-          disabled={!words}
-        />
-      </div>
-    </div>
-  );
-}
-
-function CurrencySelect({ currencyCode, onChange }: { currencyCode: string; onChange: (code: string) => void }) {
-  const { t, locale } = useLocale();
-  return (
-    <div className="mx-auto mb-6 max-w-xs">
-      <label className="field-label text-center" htmlFor="fin-currency">
-        {t.financial.currencyLabel}
-      </label>
-      <select
-        id="fin-currency"
-        className="field-select text-center text-sm font-semibold"
-        value={currencyCode}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        {CURRENCIES.map((c) => (
-          <option key={c.code} value={c.code}>
-            {locale === 'ar' ? c.nameAr : c.nameEn} ({c.code})
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
-function PercentagePanel({ currencyCode }: { currencyCode: string }) {
-  const { t } = useLocale();
   const [mode, setMode] = useState<PercentMode>('of');
   const [value, setValue] = useState('500000');
   const [percent, setPercent] = useState('10');
@@ -321,59 +158,46 @@ function PercentagePanel({ currencyCode }: { currencyCode: string }) {
       ) : (
         <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
           {mode === 'of' && (
-            <AmountResultTile
-              highlight
-              label={t.financial.percentage.resultLabel}
-              amount={percentOf(v!, p!).result}
-              currencyCode={currencyCode}
-            />
+            <ResultTile highlight label={t.financial.percentage.resultLabel} value={fmt(percentOf(v!, p!).result, locale)} />
           )}
           {mode === 'increase' && (
             <>
-              <AmountResultTile
+              <ResultTile
                 highlight
                 label={t.financial.percentage.resultLabel}
-                amount={increaseByPercent(v!, p!).newValue}
-                currencyCode={currencyCode}
+                value={fmt(increaseByPercent(v!, p!).newValue, locale)}
               />
-              <AmountResultTile
+              <ResultTile
                 label={t.financial.percentage.changeLabel}
-                amount={increaseByPercent(v!, p!).changeAmount}
-                currencyCode={currencyCode}
+                value={fmt(increaseByPercent(v!, p!).changeAmount, locale)}
               />
             </>
           )}
           {mode === 'decrease' && (
             <>
-              <AmountResultTile
+              <ResultTile
                 highlight
                 label={t.financial.percentage.resultLabel}
-                amount={decreaseByPercent(v!, p!).newValue}
-                currencyCode={currencyCode}
+                value={fmt(decreaseByPercent(v!, p!).newValue, locale)}
               />
-              <AmountResultTile
+              <ResultTile
                 label={t.financial.percentage.changeLabel}
-                amount={decreaseByPercent(v!, p!).changeAmount}
-                currencyCode={currencyCode}
+                value={fmt(decreaseByPercent(v!, p!).changeAmount, locale)}
               />
             </>
           )}
           {mode === 'change' && (
             <>
-              <AmountResultTile
-                label={t.financial.percentage.resultLabel}
-                amount={percentDifference(vA!, vB!).difference}
-                currencyCode={currencyCode}
+              <ResultTile label={t.financial.percentage.resultLabel} value={fmt(percentDifference(vA!, vB!).difference, locale)} />
+              <ResultTile
+                highlight
+                label={t.financial.percentage.changeLabel}
+                value={
+                  percentDifference(vA!, vB!).percentChange === null
+                    ? '—'
+                    : `${fmt(percentDifference(vA!, vB!).percentChange!, locale)}%`
+                }
               />
-              {percentDifference(vA!, vB!).percentChange === null ? (
-                <ResultTile highlight label={t.financial.percentage.changeLabel} value="—" />
-              ) : (
-                <PercentResultTile
-                  highlight
-                  label={t.financial.percentage.changeLabel}
-                  value={percentDifference(vA!, vB!).percentChange!}
-                />
-              )}
             </>
           )}
         </div>
@@ -382,8 +206,8 @@ function PercentagePanel({ currencyCode }: { currencyCode: string }) {
   );
 }
 
-function VatPanel({ currencyCode }: { currencyCode: string }) {
-  const { t } = useLocale();
+function VatPanel() {
+  const { t, locale } = useLocale();
   const [direction, setDirection] = useState<VatDirection>('forward');
   const [amount, setAmount] = useState('100000');
   const [taxPercent, setTaxPercent] = useState('15');
@@ -452,22 +276,17 @@ function VatPanel({ currencyCode }: { currencyCode: string }) {
         <p className="mt-6 text-sm font-medium text-red-600 dark:text-red-400">{t.financial.invalidInput}</p>
       ) : (
         <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <AmountResultTile label={t.financial.vat.subtotal} amount={result.subtotal} currencyCode={currencyCode} />
-          <AmountResultTile label={t.financial.vat.taxAmount} amount={result.taxAmount} currencyCode={currencyCode} />
-          <AmountResultTile
-            highlight
-            label={t.financial.vat.total}
-            amount={result.total}
-            currencyCode={currencyCode}
-          />
+          <ResultTile label={t.financial.vat.subtotal} value={fmt(result.subtotal, locale)} />
+          <ResultTile label={t.financial.vat.taxAmount} value={fmt(result.taxAmount, locale)} />
+          <ResultTile highlight label={t.financial.vat.total} value={fmt(result.total, locale)} />
         </div>
       )}
     </div>
   );
 }
 
-function ProfitPanel({ currencyCode }: { currencyCode: string }) {
-  const { t } = useLocale();
+function ProfitPanel() {
+  const { t, locale } = useLocale();
   const [cost, setCost] = useState('80000');
   const [selling, setSelling] = useState('100000');
 
@@ -515,7 +334,7 @@ function ProfitPanel({ currencyCode }: { currencyCode: string }) {
         <p className="mt-6 text-sm font-medium text-red-600 dark:text-red-400">{t.financial.invalidInput}</p>
       ) : (
         <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <AmountResultTile
+          <ResultTile
             highlight
             label={
               result.isProfit
@@ -524,14 +343,12 @@ function ProfitPanel({ currencyCode }: { currencyCode: string }) {
                   ? t.financial.profitLoss.loss
                   : t.financial.profitLoss.breakEven
             }
-            amount={Math.abs(result.amount)}
-            currencyCode={currencyCode}
+            value={fmt(Math.abs(result.amount), locale)}
           />
-          {result.marginPercent === null ? (
-            <ResultTile label={t.financial.profitLoss.marginPercent} value="—" />
-          ) : (
-            <PercentResultTile label={t.financial.profitLoss.marginPercent} value={result.marginPercent} />
-          )}
+          <ResultTile
+            label={t.financial.profitLoss.marginPercent}
+            value={result.marginPercent === null ? '—' : `${fmt(result.marginPercent, locale)}%`}
+          />
         </div>
       )}
     </div>
@@ -541,7 +358,6 @@ function ProfitPanel({ currencyCode }: { currencyCode: string }) {
 export default function FinancialCalculatorPage() {
   const { t } = useLocale();
   const [tab, setTab] = useState<Tab>('percentage');
-  const [currencyCode, setCurrencyCode] = useState(DEFAULT_CURRENCY_CODE);
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'percentage', label: t.financial.tabPercentage },
@@ -582,10 +398,9 @@ export default function FinancialCalculatorPage() {
         </div>
 
         <div className="mx-auto mt-8 max-w-3xl">
-          <CurrencySelect currencyCode={currencyCode} onChange={setCurrencyCode} />
-          {tab === 'percentage' && <PercentagePanel currencyCode={currencyCode} />}
-          {tab === 'vat' && <VatPanel currencyCode={currencyCode} />}
-          {tab === 'profit' && <ProfitPanel currencyCode={currencyCode} />}
+          {tab === 'percentage' && <PercentagePanel />}
+          {tab === 'vat' && <VatPanel />}
+          {tab === 'profit' && <ProfitPanel />}
         </div>
       </div>
     </div>

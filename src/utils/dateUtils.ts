@@ -106,35 +106,3 @@ export function calendarDiff(dateA: Date, dateB: Date): CalendarDiff {
   };
 }
 
-export interface NextBirthdayInfo {
-  nextDate: Date;
-  daysRemaining: number;
-  isToday: boolean;
-}
-
-/**
- * Finds the next occurrence of `birth`'s month/day on or after `asOf`.
- * Feb 29 birthdays fall back to Feb 28 in non-leap years, which is the most
- * common real-world convention for birthday reminders.
- */
-export function nextBirthday(birth: Date, asOf: Date): NextBirthdayInfo {
-  const birthMonth = birth.getUTCMonth();
-  const birthDay = birth.getUTCDate();
-  const asOfStart = new Date(Date.UTC(asOf.getUTCFullYear(), asOf.getUTCMonth(), asOf.getUTCDate()));
-
-  function birthdayInYear(year: number): Date {
-    const isFeb29 = birthMonth === 1 && birthDay === 29;
-    if (isFeb29 && !isLeapYear(year)) {
-      return new Date(Date.UTC(year, 1, 28));
-    }
-    return new Date(Date.UTC(year, birthMonth, birthDay));
-  }
-
-  let candidate = birthdayInYear(asOfStart.getUTCFullYear());
-  if (candidate.getTime() < asOfStart.getTime()) {
-    candidate = birthdayInYear(asOfStart.getUTCFullYear() + 1);
-  }
-
-  const daysRemaining = Math.round((candidate.getTime() - asOfStart.getTime()) / MS_PER_DAY);
-  return { nextDate: candidate, daysRemaining, isToday: daysRemaining === 0 };
-}

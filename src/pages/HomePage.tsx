@@ -32,16 +32,8 @@ export default function HomePage() {
               {t.home.badge}
             </span>
 
-            <p
-              dir="ltr"
-              className="animate-fadeInUp text-sm font-bold uppercase tracking-[0.2em] text-brand-600 dark:text-brand-400"
-              style={{ animationDelay: '40ms' }}
-            >
-              {t.home.heroKicker}
-            </p>
-
             <h1
-              className="animate-fadeInUp mt-3 text-4xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl"
+              className="animate-fadeInUp text-4xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-5xl lg:text-6xl"
               style={{ animationDelay: '80ms' }}
             >
               <span className="bg-gradient-to-r from-brand-600 via-brand-500 to-accent-500 bg-clip-text text-transparent">
@@ -73,7 +65,7 @@ export default function HomePage() {
             style={{ animationDelay: '320ms' }}
           >
             {[
-              { value: 3, suffix: '', label: t.home.statTools },
+              { value: 4, suffix: '', label: t.home.statTools },
               { value: 11, suffix: '+', label: t.home.statCurrencies },
               { value: 2, suffix: '', label: t.home.statLanguages },
               { value: 100, suffix: '%', label: t.home.statPrivate },

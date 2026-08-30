@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocale } from '../i18n';
 import { TOOLS } from '../data/tools';
-import { IconGlobe, IconShield, IconTafqeet } from './icons';
+import { IconGlobe, IconShield, IconSparkles } from './icons';
 
 export default function Footer() {
   const { t, locale, toggleLocale, format } = useLocale();
@@ -14,13 +14,9 @@ export default function Footer() {
         <div>
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white shadow-soft">
-              <IconTafqeet className="h-[18px] w-[18px]" />
+              <IconSparkles className="h-[18px] w-[18px]" />
             </span>
-            <span dir="ltr" className="flex items-baseline gap-1.5 text-lg font-bold">
-              <span className="text-slate-900 dark:text-white">{t.common.logoShortAr}</span>
-              <span className="text-slate-300 dark:text-slate-600">|</span>
-              <span className="text-brand-600 dark:text-brand-400">{t.common.logoShortEn}</span>
-            </span>
+            <span className="text-lg font-bold text-slate-900 dark:text-white">{t.common.appName}</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-6 text-slate-500 dark:text-slate-400">{t.footer.tagline}</p>
           <div className="mt-4 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">

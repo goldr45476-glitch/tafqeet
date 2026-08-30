@@ -15,14 +15,6 @@ export default function ToolCard({ tool, index = 0 }: { tool: ToolMeta; index?: 
       style={{ animationDelay: `${index * 80}ms` }}
       className="group animate-fadeInUp glass-card flex flex-col p-6 hover:-translate-y-1.5 hover:shadow-glow focus-visible:-translate-y-1.5 focus-visible:shadow-glow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 sm:p-7"
     >
-      <span
-        dir="ltr"
-        aria-hidden="true"
-        className="pointer-events-none absolute end-5 top-5 select-none font-mono text-4xl font-extrabold text-slate-900/[0.06] transition-colors duration-300 group-hover:text-brand-500/10 dark:text-white/[0.06]"
-      >
-        {tool.number}
-      </span>
-
       <div
         className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${tool.gradient} text-white shadow-soft transition-transform duration-300 group-hover:scale-110`}
       >

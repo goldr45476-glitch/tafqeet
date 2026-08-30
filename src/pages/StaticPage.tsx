@@ -33,8 +33,8 @@ export default function StaticPage({ page }: { page: PageKey }) {
 
         {page === 'contact' && (
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="mailto:hello@tafqeet.app" className="btn-primary">
-              hello@tafqeet.app
+            <a href="mailto:hello@adminpro.tools" className="btn-primary">
+              hello@adminpro.tools
             </a>
           </div>
         )}

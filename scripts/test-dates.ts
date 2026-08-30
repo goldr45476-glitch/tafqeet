@@ -1,4 +1,4 @@
-import { calendarDiff, nextBirthday, parseDateInputToUTC, isValidDateString } from '../src/utils/dateUtils';
+import { calendarDiff, parseDateInputToUTC, isValidDateString } from '../src/utils/dateUtils';
 
 function show(label: string, a: string, b: string) {
   const dA = parseDateInputToUTC(a)!;
@@ -19,11 +19,3 @@ console.log('2023-02-31 valid?', isValidDateString('2023-02-31')); // false
 console.log('2024-02-29 valid?', isValidDateString('2024-02-29')); // true (leap)
 console.log('2023-02-29 valid?', isValidDateString('2023-02-29')); // false (not leap)
 console.log('2026-08-29 valid?', isValidDateString('2026-08-29')); // true
-
-console.log('\nnext birthday checks (asOf 2026-08-29):');
-const asOf = parseDateInputToUTC('2026-08-29')!;
-for (const b of ['1990-08-29', '1990-08-30', '1990-01-15', '2000-02-29']) {
-  const birth = parseDateInputToUTC(b)!;
-  const nb = nextBirthday(birth, asOf);
-  console.log(`birth=${b} -> next=${nb.nextDate.toISOString().slice(0,10)} daysRemaining=${nb.daysRemaining} isToday=${nb.isToday}`);
-}

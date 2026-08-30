@@ -47,7 +47,6 @@ export default {
       backgroundImage: {
         'grid-pattern':
           'linear-gradient(to right, rgba(120,140,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,140,255,0.08) 1px, transparent 1px)',
-        'dot-pattern': 'radial-gradient(circle, rgba(120,140,255,0.35) 1px, transparent 1.5px)',
       },
       keyframes: {
         float: {
@@ -74,22 +73,6 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(-8px) scale(0.96)' },
           '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
         },
-        drift: {
-          '0%, 100%': { transform: 'translateX(0px)' },
-          '50%': { transform: 'translateX(-26px)' },
-        },
-        driftReverse: {
-          '0%, 100%': { transform: 'translateX(0px)' },
-          '50%': { transform: 'translateX(26px)' },
-        },
-        spinSlow: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-        bgSwitchIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
       },
       animation: {
         float: 'float 9s ease-in-out infinite',
@@ -98,10 +81,6 @@ export default {
         fadeInUp: 'fadeInUp 0.6s ease both',
         shimmer: 'shimmer 3s linear infinite',
         toastIn: 'toastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-        drift: 'drift 16s ease-in-out infinite',
-        driftReverse: 'driftReverse 19s ease-in-out infinite',
-        spinSlow: 'spinSlow 42s linear infinite',
-        bgSwitchIn: 'bgSwitchIn 0.5s ease both',
       },
     },
   },
