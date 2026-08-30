@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface-light text-slate-800 antialiased dark:bg-surface-dark dark:text-slate-100;
+  font-feature-settings: 'cv11', 'ss01';
+  overflow-x: hidden;
+}
+
+html[lang='ar'] body {
+  @apply font-arabic;
+}
+html[lang='en'] body {
+  @apply font-sans;
+}
+
+::selection {
+  @apply bg-brand-400/30 text-inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300/70 dark:bg-slate-700/70;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400/80 dark:bg-slate-600/80;
+}
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/60 bg-white/70 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60;
+  }
+
+  .glass-card {
+    @apply relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 shadow-soft backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/70;
+  }
+
+  .section-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-brand-400/50 dark:hover:text-brand-300;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:text-slate-300 dark:hover:bg-white/10;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-slate-600 dark:text-slate-300;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-base text-slate-800 shadow-sm outline-none transition-all placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-900/40;
+  }
+
+  .field-select {
+    @apply field-input cursor-pointer;
+  }
+
+  .chip-toggle {
+    @apply inline-flex cursor-pointer select-none items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-all hover:border-brand-300 dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-300;
+  }
+  .chip-toggle[data-active='true'] {
+    @apply border-transparent bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-soft;
+  }
+
+  .result-box {
+    @apply relative rounded-3xl border border-brand-100 bg-gradient-to-br from-brand-50 via-white to-accent-50 p-6 shadow-soft dark:border-brand-900/40 dark:from-brand-950/40 dark:via-slate-900/60 dark:to-accent-950/20;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-area,
+  #print-area * {
+    visibility: visible;
+  }
+  #print-area {
+    position: absolute;
+    inset: 0;
+    padding: 2rem;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

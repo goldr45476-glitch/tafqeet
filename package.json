@@ -1,0 +1,33 @@
+{
+  "name": "tafqeet",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "تفقيط | TAFQEET — TAFQEET & Administrative Tools (Tafqeet, Financial Calculator, Administrative Documents).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "start": "vite preview --host 0.0.0.0 --port ${PORT:-4173}",
+    "typecheck": "tsc -b --noEmit",
+    "test:engine": "tsx scripts/test-engine.ts",
+    "test:dates": "tsx scripts/test-dates.ts",
+    "test:composer": "tsx scripts/test-composer.ts"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.45",
+    "tailwindcss": "^3.4.10",
+    "tsx": "^4.19.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}
