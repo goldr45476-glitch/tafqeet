@@ -260,7 +260,7 @@ export const en = {
     },
     contact: {
       title: 'Contact',
-      body: 'Have feedback or a feature request? We would love to hear from you as this toolkit continues to grow.',
+      body: 'Have feedback or a feature request? We would love to hear from you as this toolkit continues to grow. you can reach us at goldr45476@gmail.com.',
     },
   },
   errors: {
