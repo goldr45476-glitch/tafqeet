@@ -1,7 +1,8 @@
 import { parseAmountString, scaleToUnits } from './parseAmount';
 import {
   ARABIC_DECIMAL_SEPARATOR_WORD,
-  ARABIC_ONLY_SUFFIX,
+  ARABIC_ONLY_WORD,
+  ARABIC_NO_MORE_WORD,
   ARABIC_ZERO_WORD,
   arabicNegativePrefix,
   attachDualReplacingTwo,
@@ -99,7 +100,10 @@ function buildCurrencyArabic(
   let result = parts.join(' و');
   if (negative) result = `${arabicNegativePrefix()} ${result}`;
   if (addOnly) {
-    result = onlyPosition === 'start' ? `${ARABIC_ONLY_SUFFIX} ${result}` : `${result} ${ARABIC_ONLY_SUFFIX}`;
+    result =
+      onlyPosition === 'start'
+        ? `${ARABIC_ONLY_WORD} ${result} ${ARABIC_NO_MORE_WORD}`
+        : `${result} ${ARABIC_ONLY_WORD} ${ARABIC_NO_MORE_WORD}`;
   }
   return result;
 }
@@ -120,7 +124,10 @@ function buildPlainArabic(
   }
   if (negative) result = `${arabicNegativePrefix()} ${result}`;
   if (addOnly) {
-    result = onlyPosition === 'start' ? `${ARABIC_ONLY_SUFFIX} ${result}` : `${result} ${ARABIC_ONLY_SUFFIX}`;
+    result =
+      onlyPosition === 'start'
+        ? `${ARABIC_ONLY_WORD} ${result} ${ARABIC_NO_MORE_WORD}`
+        : `${result} ${ARABIC_ONLY_WORD} ${ARABIC_NO_MORE_WORD}`;
   }
   return result;
 }

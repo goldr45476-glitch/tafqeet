@@ -208,6 +208,7 @@ export function arabicNegativePrefix(): string {
   return 'سالب';
 }
 
-export const ARABIC_ONLY_SUFFIX = 'فقط لا غير';
+export const ARABIC_ONLY_WORD = 'فقط';
+export const ARABIC_NO_MORE_WORD = 'لا غير';
 export const ARABIC_DECIMAL_SEPARATOR_WORD = 'فاصلة';
 export const ARABIC_ZERO_WORD = 'صفر';
