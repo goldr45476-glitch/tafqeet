@@ -34,6 +34,7 @@ export interface ScaleForms {
   dual: string;
   plural: string;
   accusative: string;
+  construct: string;
 }
 
 // Scale words (ألف / مليون / مليار / تريليون / كوادريليون ...) are always
@@ -41,12 +42,12 @@ export interface ScaleForms {
 // masculine-noun agreement rules regardless of the currency's own gender.
 export const SCALE_FORMS: (ScaleForms | null)[] = [
   null,
-  { singular: 'ألف', dual: 'ألفان', plural: 'آلاف', accusative: 'ألفًا' },
-  { singular: 'مليون', dual: 'مليونان', plural: 'ملايين', accusative: 'مليونًا' },
-  { singular: 'مليار', dual: 'ملياران', plural: 'مليارات', accusative: 'مليارًا' },
-  { singular: 'تريليون', dual: 'تريليونان', plural: 'تريليونات', accusative: 'تريليونًا' },
-  { singular: 'كوادريليون', dual: 'كوادريليونان', plural: 'كوادريليونات', accusative: 'كوادريليونًا' },
-  { singular: 'كوينتليون', dual: 'كوينتليونان', plural: 'كوينتليونات', accusative: 'كوينتليونًا' },
+  { singular: 'ألف', dual: 'ألفان', plural: 'آلاف', accusative: 'ألفًا', construct: 'ألفَ' },
+  { singular: 'مليون', dual: 'مليونان', plural: 'ملايين', accusative: 'مليونًا', construct: 'مليونَ' },
+  { singular: 'مليار', dual: 'ملياران', plural: 'مليارات', accusative: 'مليارًا', construct: 'مليارَ' },
+  { singular: 'تريليون', dual: 'تريليونان', plural: 'تريليونات', accusative: 'تريليونًا', construct: 'تريليونَ' },
+  { singular: 'كوادريليون', dual: 'كوادريليونان', plural: 'كوادريليونات', accusative: 'كوادريليونًا', construct: 'كوادريليونَ' },
+  { singular: 'كوينتليون', dual: 'كوينتليونان', plural: 'كوينتليونات', accusative: 'كوينتليونًا', construct: 'كوينتليونَ' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -148,7 +149,7 @@ export function threeDigitWord(n: number, gender: Gender): string {
  * (rightmost, un-scaled) group — the group that is directly adjacent to
  * whatever noun ultimately follows (e.g. a currency name).
  */
-export function integerToArabicWords(value: bigint, gender: Gender): string {
+export function integerToArabicWords(value: bigint, gender: Gender, directNoun: boolean = false): string {
   if (value < 0n) throw new Error('integerToArabicWords expects a non-negative value');
   if (value === 0n) return 'صفر';
 
@@ -163,6 +164,13 @@ export function integerToArabicWords(value: bigint, gender: Gender): string {
     throw new Error('Number is too large to be converted (exceeds supported scale words).');
   }
 
+  // The scale word (ألف/مليون/...) closest to whatever noun follows the whole
+  // number (e.g. a currency name) is the group with the smallest index that
+  // still has a non-zero value — nothing else stands between it and that
+  // noun. That group is grammatically "mudaf" to the noun, so its "many"
+  // (11-99) accusative form must drop the tanween: "ألفَ" not "ألفًا".
+  const nearestNonZeroIndex = groups.findIndex((g) => g !== 0);
+
   const parts: string[] = [];
   for (let i = groups.length - 1; i >= 0; i--) {
     const groupValue = groups[i];
@@ -175,7 +183,10 @@ export function integerToArabicWords(value: bigint, gender: Gender): string {
 
     const scale = SCALE_FORMS[i]!;
     const bucket = bucketOf(groupValue);
-    const scaleWord = pluralForm(groupValue, scale);
+    let scaleWord = pluralForm(groupValue, scale);
+    if (bucket === 'many' && directNoun && i === nearestNonZeroIndex) {
+      scaleWord = scale.construct;
+    }
 
     if (bucket === 'one' && groupValue === 1) {
       // "ألف" not "واحد ألف"

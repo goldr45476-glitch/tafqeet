@@ -38,12 +38,13 @@ export function convertNumberToWords(options: ConvertNumberOptions): ConvertNumb
   const decimalPlaces = options.decimalPlaces ?? currency?.decimalPlaces ?? 2;
   const includeSubunit = options.includeSubunit ?? true;
   const addOnly = options.addOnly ?? true;
+  const onlyPosition = options.onlyPosition ?? 'start';
 
   const { integerUnits, minorUnits } = scaleToUnits(parsed, decimalPlaces);
 
   const wordsAr = currency
-    ? buildCurrencyArabic(integerUnits, minorUnits, parsed.negative, currency, includeSubunit, addOnly)
-    : buildPlainArabic(integerUnits, minorUnits, decimalPlaces, parsed.negative, addOnly);
+    ? buildCurrencyArabic(integerUnits, minorUnits, parsed.negative, currency, includeSubunit, addOnly, onlyPosition)
+    : buildPlainArabic(integerUnits, minorUnits, decimalPlaces, parsed.negative, addOnly, onlyPosition);
 
   const wordsEn = currency
     ? buildCurrencyEnglish(integerUnits, minorUnits, parsed.negative, currency, includeSubunit, addOnly)
@@ -71,6 +72,7 @@ function buildCurrencyArabic(
   currency: NonNullable<ReturnType<typeof getCurrency>>,
   includeSubunit: boolean,
   addOnly: boolean,
+  onlyPosition: 'start' | 'end',
 ): string {
   const showMinor = includeSubunit && currency.minor !== null && minorUnits > 0;
   const showMajor = !(units === 0n && showMinor);
@@ -78,7 +80,7 @@ function buildCurrencyArabic(
   const parts: string[] = [];
 
   if (showMajor) {
-    const majorWords = integerToArabicWords(units, currency.major.gender);
+    const majorWords = integerToArabicWords(units, currency.major.gender, true);
     const majorMod100 = Number(units % 100n);
     const majorNoun = pluralForm(majorMod100, currency.major.ar);
     parts.push(
@@ -87,7 +89,7 @@ function buildCurrencyArabic(
   }
 
   if (showMinor && currency.minor) {
-    const minorWords = integerToArabicWords(BigInt(minorUnits), currency.minor.gender);
+    const minorWords = integerToArabicWords(BigInt(minorUnits), currency.minor.gender, true);
     const minorNoun = pluralForm(minorUnits % 100, currency.minor.ar);
     parts.push(
       bucketOf(minorUnits) === 'two' ? attachDualReplacingTwo(minorWords, minorNoun) : `${minorWords} ${minorNoun}`,
@@ -96,7 +98,9 @@ function buildCurrencyArabic(
 
   let result = parts.join(' و');
   if (negative) result = `${arabicNegativePrefix()} ${result}`;
-  if (addOnly) result = `${result} ${ARABIC_ONLY_SUFFIX}`;
+  if (addOnly) {
+    result = onlyPosition === 'start' ? `${ARABIC_ONLY_SUFFIX} ${result}` : `${result} ${ARABIC_ONLY_SUFFIX}`;
+  }
   return result;
 }
 
@@ -106,6 +110,7 @@ function buildPlainArabic(
   decimalPlaces: number,
   negative: boolean,
   addOnly: boolean,
+  onlyPosition: 'start' | 'end',
 ): string {
   let result = integerToArabicWords(units, 'masculine');
   if (decimalPlaces > 0 && minorUnits > 0) {
@@ -114,7 +119,9 @@ function buildPlainArabic(
     result = ARABIC_ZERO_WORD;
   }
   if (negative) result = `${arabicNegativePrefix()} ${result}`;
-  if (addOnly) result = `${result} ${ARABIC_ONLY_SUFFIX}`;
+  if (addOnly) {
+    result = onlyPosition === 'start' ? `${ARABIC_ONLY_SUFFIX} ${result}` : `${result} ${ARABIC_ONLY_SUFFIX}`;
+  }
   return result;
 }
 

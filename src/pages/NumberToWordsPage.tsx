@@ -13,7 +13,7 @@ import {
   getCurrency,
   type ConvertNumberOutcome,
 } from '../utils/numberToWordsEngine';
-import { IconPrinter, IconSwap, IconTafqeet, IconTrash } from '../components/icons';
+import { IconSwap, IconTafqeet, IconTrash } from '../components/icons';
 
 interface RecentEntry {
   id: string;
@@ -34,12 +34,13 @@ export default function NumberToWordsPage() {
   const { showToast } = useToast();
 
   const [mode, setMode] = useState<Mode>('currency');
-  const [rawValue, setRawValue] = useState('1250.750');
+  const [rawValue, setRawValue] = useState('');
   const [currencyCode, setCurrencyCode] = useState(DEFAULT_CURRENCY_CODE);
   const [displayLanguage, setDisplayLanguage] = useState<'ar' | 'en'>(locale);
   const [decimalPlacesOverride, setDecimalPlacesOverride] = useState<number | 'default'>('default');
   const [includeSubunit, setIncludeSubunit] = useState(true);
   const [addOnly, setAddOnly] = useState(true);
+  const [onlyPosition, setOnlyPosition] = useState<'start' | 'end'>('start');
 
   const [outcome, setOutcome] = useState<ConvertNumberOutcome | null>(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -57,6 +58,7 @@ export default function NumberToWordsPage() {
       decimalPlaces: effectiveDecimalPlaces,
       includeSubunit,
       addOnly,
+      onlyPosition,
     });
     setOutcome(result);
     setHasSubmitted(true);
@@ -104,13 +106,10 @@ export default function NumberToWordsPage() {
       currencyCode: entry.currencyCode,
       includeSubunit,
       addOnly,
+      onlyPosition,
     });
     setOutcome(result);
     setHasSubmitted(true);
-  }
-
-  function handlePrint() {
-    window.print();
   }
 
   const primaryWords = outcome?.success ? (displayLanguage === 'ar' ? outcome.wordsAr : outcome.wordsEn) : '';
@@ -271,6 +270,17 @@ export default function NumberToWordsPage() {
                   />
                   {t.numberToWords.addOnlyLabel}
                 </label>
+                {addOnly && (
+                  <select
+                    className="field-select"
+                    aria-label={t.numberToWords.onlyPositionLabel}
+                    value={onlyPosition}
+                    onChange={(e) => setOnlyPosition(e.target.value as 'start' | 'end')}
+                  >
+                    <option value="start">{t.numberToWords.onlyPositionStart}</option>
+                    <option value="end">{t.numberToWords.onlyPositionEnd}</option>
+                  </select>
+                )}
               </div>
             </div>
 
@@ -323,15 +333,6 @@ export default function NumberToWordsPage() {
                   variant="secondary"
                   disabled={!outcome?.success}
                 />
-                <button
-                  type="button"
-                  onClick={handlePrint}
-                  disabled={!outcome?.success}
-                  className="btn-secondary disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <IconPrinter className="h-4 w-4" />
-                  {t.numberToWords.printButton}
-                </button>
               </div>
             </div>
 

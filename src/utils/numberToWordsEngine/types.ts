@@ -63,8 +63,10 @@ export interface ConvertNumberOptions {
   decimalPlaces?: number;
   /** Whether to read out the subunit (fils/cents/...) clause. */
   includeSubunit?: boolean;
-  /** Whether to append the "only, no more" idiom at the end. */
+  /** Whether to append the "only, no more" idiom. */
   addOnly?: boolean;
+  /** Where to place the "only, no more" idiom relative to the amount (Arabic only). Defaults to 'start'. */
+  onlyPosition?: 'start' | 'end';
 }
 
 export interface ConvertNumberResult {
