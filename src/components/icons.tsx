@@ -17,6 +17,23 @@ const base = (children: React.ReactNode, props: IconProps) => (
   </svg>
 );
 
+/**
+ * The site's brand mark: a numeral "1" resolving into three lines of
+ * written text — the "Tafqeet" idea (a number becomes words) in a single
+ * glyph. Replaces the generic sparkle/AI icon previously used as the logo.
+ */
+export const IconLogoMark = (props: IconProps) =>
+  base(
+    <>
+      <path d="M9 4 L12 2.5 L12 11" strokeLinejoin="round" />
+      <path d="M8.5 11 H14" />
+      <path d="M3 14 H18" />
+      <path d="M3 17.5 H13" />
+      <path d="M3 21 H9" />
+    </>,
+    props,
+  );
+
 export const IconTafqeet = (props: IconProps) =>
   base(
     <>

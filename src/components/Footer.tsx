@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocale } from '../i18n';
 import { TOOLS } from '../data/tools';
-import { IconGlobe, IconShield, IconSparkles } from './icons';
+import { IconGlobe, IconLogoMark, IconShield } from './icons';
 
 export default function Footer() {
   const { t, locale, toggleLocale, format } = useLocale();
@@ -14,7 +14,7 @@ export default function Footer() {
         <div>
           <Link to="/" className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white shadow-soft">
-              <IconSparkles className="h-[18px] w-[18px]" />
+              <IconLogoMark className="h-[18px] w-[18px]" />
             </span>
             <span className="text-lg font-bold text-slate-900 dark:text-white">{t.common.appName}</span>
           </Link>

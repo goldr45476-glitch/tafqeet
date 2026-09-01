@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useLocale } from '../i18n';
 import { useTheme } from '../hooks/useTheme';
 import { TOOLS } from '../data/tools';
-import { IconClose, IconGlobe, IconMenu, IconMoon, IconSparkles, IconSun } from './icons';
+import { IconClose, IconGlobe, IconLogoMark, IconMenu, IconMoon, IconSun } from './icons';
 
 export default function Navbar() {
   const { t, locale, toggleLocale } = useLocale();
@@ -43,7 +43,7 @@ export default function Navbar() {
       <nav className="section-container flex h-16 items-center justify-between gap-4" aria-label="Main navigation">
         <NavLink to="/" className="flex items-center gap-2.5 shrink-0">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white shadow-soft">
-            <IconSparkles className="h-[18px] w-[18px]" />
+            <IconLogoMark className="h-[18px] w-[18px]" />
           </span>
           <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">{t.common.appName}</span>
         </NavLink>

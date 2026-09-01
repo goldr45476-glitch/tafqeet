@@ -1,0 +1,17 @@
+{
+  "name": "Tafqeit",
+  "short_name": "Tafqeit",
+  "description": "أدوات إدارية ذكية في مكان واحد: تفقيط الأرقام، الفرق بين تاريخين، الحاسبة المالية، ومساعد المستندات.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f8fc",
+  "theme_color": "#5570f1",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
