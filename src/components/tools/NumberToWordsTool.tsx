@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocale } from '../../i18n';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useToast } from '../../hooks/useToast';
@@ -54,11 +54,40 @@ export default function NumberToWordsTool() {
   const effectiveDecimalPlaces =
     decimalPlacesOverride === 'default' ? (currency?.decimalPlaces ?? 2) : decimalPlacesOverride;
 
-  function runConversion(valueOverride?: string) {
-    const value = valueOverride ?? rawValue;
-    const result = convertNumberToWords({
+  /** Adds a successful result to the recent-conversions list, replacing any earlier entry for the same value/currency instead of duplicating it. */
+  function saveToHistory(value: string, result: ConvertNumberOutcome, currCode: string | null) {
+    if (!result.success) return;
+    const entry: RecentEntry = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       rawValue: value,
-      currencyCode: mode === 'currency' ? currencyCode : null,
+      currencyCode: currCode,
+      wordsAr: result.wordsAr,
+      wordsEn: result.wordsEn,
+      createdAt: Date.now(),
+    };
+    setHistory((prev) => {
+      const withoutDuplicate = prev.filter((e) => !(e.rawValue === value && e.currencyCode === currCode));
+      return [entry, ...withoutDuplicate].slice(0, MAX_HISTORY);
+    });
+  }
+
+  /**
+   * Converts live as the user types — no Enter or button press needed. The
+   * result updates on every change; after a short pause (so we're not
+   * logging every half-typed keystroke) a successful result is saved to
+   * Recent Conversions automatically.
+   */
+  useEffect(() => {
+    if (rawValue.trim() === '') {
+      setOutcome(null);
+      setHasSubmitted(false);
+      return;
+    }
+
+    const currCode = mode === 'currency' ? currencyCode : null;
+    const result = convertNumberToWords({
+      rawValue,
+      currencyCode: currCode,
       decimalPlaces: effectiveDecimalPlaces,
       includeSubunit,
       addOnly,
@@ -67,23 +96,16 @@ export default function NumberToWordsTool() {
     setOutcome(result);
     setHasSubmitted(true);
 
-    if (result.success) {
-      const entry: RecentEntry = {
-        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        rawValue: value,
-        currencyCode: mode === 'currency' ? currencyCode : null,
-        wordsAr: result.wordsAr,
-        wordsEn: result.wordsEn,
-        createdAt: Date.now(),
-      };
-      setHistory((prev) => [entry, ...prev].slice(0, MAX_HISTORY));
-    }
-    return result;
-  }
+    if (!result.success) return;
+    const timer = setTimeout(() => saveToHistory(rawValue, result, currCode), 900);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rawValue, mode, currencyCode, effectiveDecimalPlaces, includeSubunit, addOnly, onlyPosition]);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    runConversion();
+    // Result is already live — Enter/the button just saves it to history right away instead of waiting out the debounce.
+    if (outcome) saveToHistory(rawValue, outcome, mode === 'currency' ? currencyCode : null);
   }
 
   function handleClear() {
@@ -102,18 +124,11 @@ export default function NumberToWordsTool() {
   }
 
   function handleReuseEntry(entry: RecentEntry) {
+    // Just restore the inputs — the live-conversion effect above recomputes
+    // and displays the result automatically once these state updates commit.
     setMode(entry.currencyCode ? 'currency' : 'plain');
     if (entry.currencyCode) setCurrencyCode(entry.currencyCode);
     setRawValue(entry.rawValue);
-    const result = convertNumberToWords({
-      rawValue: entry.rawValue,
-      currencyCode: entry.currencyCode,
-      includeSubunit,
-      addOnly,
-      onlyPosition,
-    });
-    setOutcome(result);
-    setHasSubmitted(true);
   }
 
   const primaryWords = outcome?.success ? (displayLanguage === 'ar' ? outcome.wordsAr : outcome.wordsEn) : '';
