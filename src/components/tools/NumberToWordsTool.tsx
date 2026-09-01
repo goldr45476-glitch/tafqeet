@@ -24,7 +24,7 @@ interface RecentEntry {
 }
 
 const HISTORY_KEY = 'adminpro_ntw_history';
-const MAX_HISTORY = 12;
+const MAX_HISTORY = 10;
 
 type Mode = 'plain' | 'currency';
 
@@ -371,7 +371,7 @@ export default function NumberToWordsTool() {
               {history.length === 0 ? (
                 <p className="text-sm text-slate-400 dark:text-slate-500">{t.numberToWords.emptyHistory}</p>
               ) : (
-                <ul className="space-y-2.5">
+                <ul className="max-h-80 space-y-2.5 overflow-y-auto pe-1.5">
                   {history.map((entry) => (
                     <li key={entry.id}>
                       <button
