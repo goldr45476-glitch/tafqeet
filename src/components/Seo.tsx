@@ -6,7 +6,7 @@ export default function Seo({ title, description }: { title: string; description
   const { locale } = useLocale();
 
   useEffect(() => {
-    const fullTitle = `${title} | ${locale === 'ar' ? 'AdminPro Tools' : 'AdminPro Tools'}`;
+    const fullTitle = `${title} | ${locale === 'ar' ? 'Tafqeit' : 'Tafqeit'}`;
     document.title = fullTitle;
 
     if (description) {
