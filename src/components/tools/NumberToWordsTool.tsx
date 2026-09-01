@@ -303,10 +303,6 @@ export default function NumberToWordsTool() {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <button type="submit" className="btn-primary">
-                <IconTafqeet className="h-4 w-4" />
-                {t.numberToWords.convertButton}
-              </button>
               <button type="button" onClick={handleClear} className="btn-secondary">
                 {t.numberToWords.clearButton}
               </button>
