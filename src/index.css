@@ -100,11 +100,11 @@ html[lang='en'] body {
   body * {
     visibility: hidden;
   }
-  #print-area,
-  #print-area * {
+  [data-print-area='true'],
+  [data-print-area='true'] * {
     visibility: visible;
   }
-  #print-area {
+  [data-print-area='true'] {
     position: absolute;
     inset: 0;
     padding: 2rem;

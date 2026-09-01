@@ -74,6 +74,8 @@ export const en = {
     feature4Desc: 'No login, no waiting, no paywalls. Open a tool and get your result in seconds.',
     ctaBandTitle: 'Ready to simplify your daily admin work?',
     ctaBandSubtitle: 'Jump straight into the Number to Words tool, or browse the full toolkit.',
+    quickNavLabel: 'Quick tool navigation',
+    openStandalone: 'Open as standalone page',
   },
   tools: {
     pageTitle: 'All Tools',
