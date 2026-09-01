@@ -50,7 +50,17 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.documentElement.dir = dir;
+    // Keep the root <html> element's own direction fixed to LTR so the
+    // browser always renders its native scrollbar on the conventional
+    // (right) side of the viewport — some browsers move it to the left
+    // when <html dir="rtl">, which looked like a stray bar/mark at the
+    // far edge of the page. The actual RTL/LTR layout for all app content
+    // is applied on the #root wrapper instead; CSS `direction` inherits
+    // normally and Tailwind's [dir="rtl"] selectors match any ancestor,
+    // so this has no effect on the app's own RTL layout.
+    document.documentElement.dir = 'ltr';
+    const root = document.getElementById('root');
+    if (root) root.dir = dir;
   }, [locale, dir]);
 
   const format = useCallback((template: string, values: Record<string, string | number>) => {
