@@ -42,12 +42,12 @@ export interface ScaleForms {
 // masculine-noun agreement rules regardless of the currency's own gender.
 export const SCALE_FORMS: (ScaleForms | null)[] = [
   null,
-  { singular: 'ألف', dual: 'ألفان', plural: 'آلاف', accusative: 'ألفًا', construct: 'ألفَ' },
-  { singular: 'مليون', dual: 'مليونان', plural: 'ملايين', accusative: 'مليونًا', construct: 'مليونَ' },
-  { singular: 'مليار', dual: 'ملياران', plural: 'مليارات', accusative: 'مليارًا', construct: 'مليارَ' },
-  { singular: 'تريليون', dual: 'تريليونان', plural: 'تريليونات', accusative: 'تريليونًا', construct: 'تريليونَ' },
-  { singular: 'كوادريليون', dual: 'كوادريليونان', plural: 'كوادريليونات', accusative: 'كوادريليونًا', construct: 'كوادريليونَ' },
-  { singular: 'كوينتليون', dual: 'كوينتليونان', plural: 'كوينتليونات', accusative: 'كوينتليونًا', construct: 'كوينتليونَ' },
+  { singular: 'ألف', dual: 'ألفان', plural: 'آلاف', accusative: 'ألفا', construct: 'ألف' },
+  { singular: 'مليون', dual: 'مليونان', plural: 'ملايين', accusative: 'مليونا', construct: 'مليون' },
+  { singular: 'مليار', dual: 'ملياران', plural: 'مليارات', accusative: 'مليارا', construct: 'مليار' },
+  { singular: 'تريليون', dual: 'تريليونان', plural: 'تريليونات', accusative: 'تريليونا', construct: 'تريليون' },
+  { singular: 'كوادريليون', dual: 'كوادريليونان', plural: 'كوادريليونات', accusative: 'كوادريليونا', construct: 'كوادريليون' },
+  { singular: 'كوينتليون', dual: 'كوينتليونان', plural: 'كوينتليونات', accusative: 'كوينتليونا', construct: 'كوينتليون' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -168,7 +168,8 @@ export function integerToArabicWords(value: bigint, gender: Gender, directNoun: 
   // number (e.g. a currency name) is the group with the smallest index that
   // still has a non-zero value — nothing else stands between it and that
   // noun. That group is grammatically "mudaf" to the noun, so its "many"
-  // (11-99) accusative form must drop the tanween: "ألفَ" not "ألفًا".
+  // (11-99) form uses the construct spelling ("ألف") instead of the
+  // accusative one ("ألفا").
   const nearestNonZeroIndex = groups.findIndex((g) => g !== 0);
 
   const parts: string[] = [];
