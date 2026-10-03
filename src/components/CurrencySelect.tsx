@@ -127,7 +127,7 @@ export default function CurrencySelect({ id, value, onChange, compact = false }:
       {open && (
         <div
           ref={panelRef}
-          className="absolute inset-x-0 top-full z-40 mt-1.5 overflow-hidden rounded-md border-2 border-accent-500 bg-surface-card shadow-[0_14px_30px_-12px_rgba(74,52,20,0.55)] dark:bg-slate-900"
+          className="absolute inset-x-0 top-full z-40 mt-1.5 overflow-hidden rounded-2xl border border-accent-500 bg-surface-card shadow-[0_14px_30px_-12px_rgba(74,52,20,0.55)] dark:bg-slate-900"
         >
           <div className="border-b border-accent-300 bg-slate-100 p-2 dark:border-accent-800/60 dark:bg-slate-950">
             <input

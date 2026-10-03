@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocale } from '../../i18n';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
+import SideNotes from '../SideNotes';
 import {
   decreaseByPercent,
   increaseByPercent,
@@ -377,7 +378,7 @@ export default function FinancialCalculatorTool() {
 
       <div className="section-container">
         <PageHeader
-          tone="text-accent-700"
+          tone="text-[#8a5a1c]"
           eyebrow={t.nav.tools}
           title={t.financial.title}
           subtitle={t.financial.subtitle}
@@ -408,6 +409,7 @@ export default function FinancialCalculatorTool() {
           {tab === 'vat' && <VatPanel />}
           {tab === 'profit' && <ProfitPanel />}
         </div>
+        <SideNotes tool="financial" />
       </div>
     </div>
   );

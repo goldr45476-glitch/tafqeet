@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Lora"', '"Noto Naskh Arabic"', '"Traditional Arabic"', 'Georgia', 'serif'],
-        arabic: ['"Noto Naskh Arabic"', '"Amiri"', '"Traditional Arabic"', '"Times New Roman"', 'serif'],
+        sans: ['"Inter"', '"IBM Plex Sans Arabic"', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        arabic: ['"IBM Plex Sans Arabic"', '"Noto Naskh Arabic"', '"Segoe UI"', 'Tahoma', 'sans-serif'],
         display: ['"Amiri"', '"Cormorant Garamond"', '"Traditional Arabic"', 'Georgia', 'serif'],
       },
       colors: {
@@ -20,10 +20,10 @@ export default {
           400: '#a99b7b',
           500: '#7e725a',
           600: '#615640',
-          700: '#4a4131',
-          800: '#352e23',
-          900: '#241f17',
-          950: '#171310',
+          700: '#52483a',
+          800: '#3d3527',
+          900: '#352e23',
+          950: '#2d271e',
         },
         // Primary: deep emerald ("zumurrud")
         brand: {
@@ -80,7 +80,7 @@ export default {
         },
         surface: {
           light: '#f6efdf',
-          dark: '#16120e',
+          dark: '#2a241b',
           card: '#fffcf4',
         },
       },

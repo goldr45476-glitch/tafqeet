@@ -4,6 +4,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useToast } from '../../hooks/useToast';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
+import SideNotes from '../SideNotes';
 import CopyButton from '../CopyButton';
 import CurrencySelect from '../CurrencySelect';
 import {
@@ -156,16 +157,16 @@ export default function NumberToWordsTool() {
         <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-5">
           {/* ---------------- Form ---------------- */}
           <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 lg:col-span-3">
-            <div className="mb-6 inline-flex rounded-md border border-accent-400 bg-slate-100 p-1 dark:border-accent-800/60 dark:bg-white/5">
+            <div className="mb-6 inline-flex rounded-full border border-accent-300 bg-slate-100 p-1 dark:border-accent-800/60 dark:bg-white/5">
               <button
                 type="button"
                 onClick={() => setMode('currency')}
-                className="rounded-md px-1.5 py-1 text-sm font-bold transition-all"
+                className="rounded-full px-1.5 py-1 text-sm font-semibold transition-all"
               >
                 <span
                   className={
                     mode === 'currency'
-                      ? 'rounded bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
+                      ? 'rounded-full bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
                       : 'px-2 py-1 text-slate-600 dark:text-slate-400'
                   }
                 >
@@ -175,12 +176,12 @@ export default function NumberToWordsTool() {
               <button
                 type="button"
                 onClick={() => setMode('plain')}
-                className="rounded-md px-1.5 py-1 text-sm font-bold transition-all"
+                className="rounded-full px-1.5 py-1 text-sm font-semibold transition-all"
               >
                 <span
                   className={
                     mode === 'plain'
-                      ? 'rounded bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
+                      ? 'rounded-full bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
                       : 'px-2 py-1 text-slate-600 dark:text-slate-400'
                   }
                 >
@@ -387,6 +388,7 @@ export default function NumberToWordsTool() {
             </div>
           </div>
         </div>
+        <SideNotes tool="numberToWords" />
       </div>
     </div>
   );

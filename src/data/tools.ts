@@ -38,7 +38,7 @@ export const TOOLS: ToolMeta[] = [
     icon: IconFinancial,
     solid: 'bg-accent-700',
     tone: 'accent',
-    medallion: 'text-accent-700',
+    medallion: 'text-[#8a5a1c]',
   },
   {
     id: 'documentHelper',

@@ -259,6 +259,32 @@ export const ar: Translations = {
     disclaimer: 'هذه قوالب إدارية عامة للتسهيل فقط — وليست مستندات قانونية رسمية. يرجى مراجعتها وتعديلها قبل الاستخدام الرسمي.',
     requiredFieldsError: 'يرجى تعبئة الحقول الإلزامية.',
   },
+  sideNotes: {
+    numberToWords: {
+      rightLabel: 'فائدة التفقيط',
+      rightText: 'كتابة المبلغ بالحروف تمنع التحريف والالتباس في الشيكات والعقود.',
+      leftLabel: 'عبارة',
+      leftText: 'الدقّة في الحساب أمانة.',
+    },
+    dateDifference: {
+      rightLabel: 'مَثَل',
+      rightText: 'الوقت كالسيف إن لم تقطعه قطعك.',
+      leftLabel: 'فائدة',
+      leftText: 'معرفة المدة بالأيام والساعات تُحسن التخطيط وتضبط المواعيد.',
+    },
+    financial: {
+      rightLabel: 'مَثَل',
+      rightText: 'الدرهم الأبيض ينفع في اليوم الأسود.',
+      leftLabel: 'فائدة',
+      leftText: 'حساب النسبة والضريبة مسبقًا يجنّبك المفاجآت في الفاتورة.',
+    },
+    documentHelper: {
+      rightLabel: 'مَثَل',
+      rightText: 'ما كُتب قرّ وما حُفظ فرّ.',
+      leftLabel: 'فائدة',
+      leftText: 'مسودة جاهزة بصياغة رسمية توفّر وقتك وتحفظ هيبة مخاطبتك.',
+    },
+  },
   footer: {
     tagline: 'أدوات ذكية لعملك الإداري اليومي.',
     toolsTitle: 'الأدوات',

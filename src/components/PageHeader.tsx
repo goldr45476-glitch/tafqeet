@@ -6,7 +6,7 @@ import React, { useId } from 'react';
  */
 function Medallion({ children, tone }: { children: React.ReactNode; tone: string }) {
   return (
-    <div className="relative mx-auto mb-5 h-[100px] w-[100px]">
+    <div className="relative mx-auto mb-3.5 h-[76px] w-[76px]">
       <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full" aria-hidden="true">
         <g fill="currentColor" className={tone}>
           <rect x="21" y="21" width="78" height="78" />
@@ -38,7 +38,7 @@ function Medallion({ children, tone }: { children: React.ReactNode; tone: string
 function Flourish() {
   const uid = useId();
   return (
-    <svg viewBox="0 0 320 36" className="mx-auto mt-4 h-8 w-[240px] max-w-full text-accent-500" aria-hidden="true">
+    <svg viewBox="0 0 320 36" className="mx-auto mt-2 h-7 w-[150px] max-w-full text-accent-500" aria-hidden="true">
       <defs>
         <linearGradient id={`${uid}-l`} x1="0" x2="1">
           <stop offset="0" stopColor="currentColor" stopOpacity="0" />
@@ -88,14 +88,14 @@ export default function PageHeader({
     <div className="animate-fadeInUp mx-auto max-w-3xl text-center">
       {icon && <Medallion tone={tone}>{icon}</Medallion>}
       {eyebrow && (
-        <span className="mb-1 inline-block text-sm font-bold text-accent-700 dark:text-accent-300">
+        <span className="mb-2 inline-block rounded-full border border-accent-300/70 bg-surface-card/70 px-3.5 py-0.5 text-[0.82rem] font-semibold text-accent-700 dark:border-accent-300/40 dark:bg-slate-800/70 dark:text-accent-200">
           {eyebrow}
         </span>
       )}
-      <h1 className="text-4xl font-bold text-brand-900 dark:text-accent-100 sm:text-5xl">{title}</h1>
+      <h1 className="text-[2.1rem] font-bold text-brand-900 dark:text-accent-100 sm:text-5xl">{title}</h1>
       <Flourish />
       {subtitle && (
-        <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300 sm:text-lg">
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300">
           {subtitle}
         </p>
       )}

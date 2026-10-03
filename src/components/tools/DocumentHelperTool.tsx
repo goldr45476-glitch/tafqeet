@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useLocale } from '../../i18n';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
+import SideNotes from '../SideNotes';
 import CopyButton from '../CopyButton';
 import CurrencySelect from '../CurrencySelect';
 import {
@@ -213,6 +214,7 @@ export default function DocumentHelperTool() {
             </div>
           </div>
         </div>
+        <SideNotes tool="documentHelper" />
       </div>
     </div>
   );

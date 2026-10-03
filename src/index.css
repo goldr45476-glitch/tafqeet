@@ -66,9 +66,7 @@ html[lang='ar'] h3,
 html[lang='ar'] .font-display {
   font-family: 'Amiri', 'Traditional Arabic', 'Times New Roman', serif;
 }
-/* Page titles use the calligraphic Ruqaa hand. */
 html[lang='ar'] h1 {
-  font-family: 'Aref Ruqaa', 'Amiri', 'Traditional Arabic', serif;
   line-height: 1.5;
 }
 html[lang='en'] h1,
@@ -144,7 +142,7 @@ input[type='checkbox'] {
   }
   .dark .field-input {
     box-shadow:
-      inset 0 0 0 3px #241f17,
+      inset 0 0 0 3px #352e23,
       inset 0 0 0 4px rgb(var(--gold) / 0.3);
   }
   .field-input:focus {
@@ -292,5 +290,359 @@ input[type='checkbox'] {
   background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E %3Cg fill=%22%23b98530%22%3E%3Crect x=%228%22 y=%228%22 width=%2224%22 height=%2224%22/%3E%3Crect x=%228%22 y=%228%22 width=%2224%22 height=%2224%22 transform=%22rotate(45 20 20)%22/%3E%3C/g%3E %3Cg fill=%22%23fbf6e5%22%3E%3Crect x=%2213.5%22 y=%2213.5%22 width=%2213%22 height=%2213%22/%3E%3Crect x=%2213.5%22 y=%2213.5%22 width=%2213%22 height=%2213%22 transform=%22rotate(45 20 20)%22/%3E%3C/g%3E %3Ccircle cx=%2220%22 cy=%2220%22 r=%223.4%22 fill=%22%23b98530%22/%3E%3C/svg%3E") center / 32px 32px no-repeat, var(--badge-bg, #fbf6e5);
 }
 
-.dark .result-box { --badge-bg: #241f17; }
+.dark .result-box { --badge-bg: #3e3526; }
 .dark .glass-card::before { border-color: rgb(var(--gold-rgb) / 0.3); }
+
+/* =====================================================================
+   Modern-classic layer — contemporary structure, classic voice.
+   Clean sans UI text, generous radii, pill controls, soft layered shadows and
+   hairline borders; Amiri serif headings and results, gold hairlines, one
+   star-and-rule divider, small medallions and the star badge on results.
+   ===================================================================== */
+body {
+  background-image: none;
+  line-height: 1.8;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--tile-light);
+  background-size: 72px 72px;
+  opacity: 0.32;
+}
+.dark body::before {
+  background-image: var(--tile-dark);
+  opacity: 0.75;
+}
+
+/* Cards */
+.glass-panel,
+.glass-card {
+  border-radius: 20px;
+  border-color: rgb(var(--gold-soft-rgb) / 0.7);
+  box-shadow:
+    0 1px 2px rgb(74 52 20 / 0.05),
+    0 18px 40px -22px rgb(74 52 20 / 0.35);
+}
+.dark .glass-panel,
+.dark .glass-card {
+  border-color: rgb(var(--gold-soft-rgb) / 0.34);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.3),
+    0 10px 26px -14px rgb(0 0 0 / 0.5);
+}
+.glass-card::before {
+  display: none;
+}
+.glass-card::after {
+  inset: -1px 32px auto 32px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, transparent, rgb(var(--gold-rgb)), transparent);
+}
+.dark .glass-card::after {
+  opacity: 0.8;
+}
+
+/* Fields */
+.field-input {
+  border-width: 1px;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+.dark .field-input {
+  border-color: rgb(var(--gold-soft-rgb) / 0.5);
+  box-shadow: none;
+}
+.field-input:hover {
+  border-color: rgb(var(--gold-rgb));
+}
+.field-input:focus,
+.dark .field-input:focus {
+  border-color: rgb(var(--emerald));
+  box-shadow: 0 0 0 4px rgb(var(--emerald) / 0.14);
+}
+.dark .field-input:focus {
+  border-color: rgb(var(--gold-soft-rgb));
+  box-shadow: 0 0 0 4px rgb(var(--gold-soft-rgb) / 0.18);
+}
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5l4 4 4-4' fill='none' stroke='%23b98530' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  background-position: right 1rem center;
+}
+[dir='rtl'] .field-select {
+  background-position: left 1rem center;
+}
+.field-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.chip-toggle {
+  border-radius: 999px;
+  font-weight: 600;
+}
+.btn-primary {
+  border-width: 0;
+  padding: 0.7rem 1.75rem;
+  box-shadow:
+    0 8px 18px -8px rgb(var(--emerald) / 0.7),
+    inset 0 0 0 1px rgb(var(--gold-soft-rgb) / 0.5);
+}
+.btn-primary:hover {
+  box-shadow:
+    0 10px 22px -8px rgb(var(--emerald) / 0.75),
+    inset 0 0 0 1px rgb(var(--gold-soft-rgb) / 0.8);
+}
+.btn-secondary {
+  padding: 0.7rem 1.75rem;
+  box-shadow: none;
+}
+.btn-primary:active,
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+/* Result */
+.result-box {
+  border: 1px solid rgb(var(--gold-soft-rgb));
+  border-radius: 20px;
+  padding: 2rem 1.9rem 1.6rem;
+  box-shadow:
+    0 18px 40px -24px rgb(74 52 20 / 0.5),
+    inset 0 0 0 5px #fbf6e5,
+    inset 0 0 0 6px rgb(var(--gold-soft-rgb) / 0.55);
+}
+.dark .result-box {
+  background-color: #3e3526;
+  border-color: rgb(var(--gold-soft-rgb) / 0.6);
+  box-shadow:
+    0 18px 40px -24px rgb(0 0 0 / 0.6),
+    inset 0 0 0 5px #3e3526,
+    inset 0 0 0 6px rgb(var(--gold-soft-rgb) / 0.35);
+}
+.result-box::before {
+  top: -16px;
+}
+
+/* Frieze: one hairline with a star in the middle */
+.frieze {
+  height: 9px;
+}
+.frieze::before,
+.frieze::after {
+  -webkit-mask: none;
+  mask: none;
+  inset: auto;
+}
+.frieze::before {
+  left: 0;
+  right: 0;
+  top: 4px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(var(--gold-rgb) / 0.6) 18%,
+    rgb(var(--gold-rgb) / 0.6) 82%,
+    transparent
+  );
+}
+.frieze::after {
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  background: rgb(var(--gold-rgb));
+  transform: rotate(45deg);
+}
+
+/* Side notes: proverbs & benefits. Real text in a Unicode calligraphic face. */
+.side-notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 64rem;
+  margin: 1.75rem auto 0;
+}
+@media (max-width: 560px) {
+  .side-notes {
+    grid-template-columns: 1fr;
+  }
+}
+.side-note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.4rem 1.4rem 1.5rem;
+  text-align: center;
+  color: rgb(var(--emerald));
+  border: 1px solid rgb(var(--gold-soft-rgb) / 0.7);
+  border-radius: 18px;
+  background: rgb(255 252 244 / 0.82);
+}
+.dark .side-note {
+  color: #f0dca5;
+  border-color: rgb(var(--gold-soft-rgb) / 0.34);
+  background: rgb(53 46 35 / 0.82);
+}
+.side-note::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgb(var(--gold-soft-rgb) / 0.45);
+  border-radius: 13px;
+  pointer-events: none;
+}
+.side-note__star {
+  width: 30px;
+  height: 30px;
+  color: rgb(var(--gold-rgb));
+}
+.side-note__star-core {
+  fill: #fffcf4;
+}
+.dark .side-note__star-core {
+  fill: #352e23;
+}
+.side-note__label {
+  padding: 1px 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #7b5420;
+  background: #fbf6e5;
+  border: 1px solid rgb(var(--gold-soft-rgb) / 0.7);
+  border-radius: 999px;
+}
+.dark .side-note__label {
+  color: #ecd69b;
+  background: #3e3526;
+  border-color: rgb(var(--gold-soft-rgb) / 0.4);
+}
+.side-note__rule {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgb(var(--gold-rgb)), transparent);
+}
+.side-note__text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2.1;
+  letter-spacing: 0;
+  color: #0c352c;
+}
+html[lang='ar'] .side-note__text {
+  font-family: 'Aref Ruqaa', 'Amiri', 'Traditional Arabic', serif;
+}
+html[lang='en'] .side-note__text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+.dark .side-note__text {
+  color: #f8edcf;
+}
+.side-note__dia {
+  width: 6px;
+  height: 6px;
+  margin-top: 2px;
+  background: rgb(var(--gold-rgb));
+  transform: rotate(45deg);
+}
+
+/* Wide screens: arched panels standing in the empty margins either side of the tool.
+   Each tool declares how wide its main grid is (data-span), so the notes only float
+   outside once the margins are wide enough to hold them. */
+@media (min-width: 1200px) {
+  .side-notes[data-span='sm'] {
+    display: contents;
+  }
+  .side-notes[data-span='sm'] .side-note {
+    position: absolute;
+    top: 340px;
+    width: 168px;
+    padding: 1.6rem 1rem 1.75rem;
+    border-radius: 84px 84px 18px 18px;
+  }
+  .side-notes[data-span='sm'] .side-note::before {
+    border-radius: 78px 78px 13px 13px;
+  }
+  .side-notes[data-span='sm'] .side-note--r {
+    right: calc(50% - 384px - 28px - 168px);
+  }
+  .side-notes[data-span='sm'] .side-note--l {
+    left: calc(50% - 384px - 28px - 168px);
+  }
+  .side-notes[data-span='sm'] .side-note__text {
+    font-size: 1.2rem;
+    line-height: 2.05;
+  }
+}
+@media (min-width: 1440px) {
+  .side-notes[data-span='md'] {
+    display: contents;
+  }
+  .side-notes[data-span='md'] .side-note {
+    position: absolute;
+    top: 340px;
+    width: 168px;
+    padding: 1.6rem 1rem 1.75rem;
+    border-radius: 84px 84px 18px 18px;
+  }
+  .side-notes[data-span='md'] .side-note::before {
+    border-radius: 78px 78px 13px 13px;
+  }
+  .side-notes[data-span='md'] .side-note--r {
+    right: calc(50% - 512px - 28px - 168px);
+  }
+  .side-notes[data-span='md'] .side-note--l {
+    left: calc(50% - 512px - 28px - 168px);
+  }
+  .side-notes[data-span='md'] .side-note__text {
+    font-size: 1.2rem;
+    line-height: 2.05;
+  }
+}
+@media (min-width: 1560px) {
+  .side-notes[data-span='lg'] {
+    display: contents;
+  }
+  .side-notes[data-span='lg'] .side-note {
+    position: absolute;
+    top: 340px;
+    width: 168px;
+    padding: 1.6rem 1rem 1.75rem;
+    border-radius: 84px 84px 18px 18px;
+  }
+  .side-notes[data-span='lg'] .side-note::before {
+    border-radius: 78px 78px 13px 13px;
+  }
+  .side-notes[data-span='lg'] .side-note--r {
+    right: calc(50% - 576px - 28px - 168px);
+  }
+  .side-notes[data-span='lg'] .side-note--l {
+    left: calc(50% - 576px - 28px - 168px);
+  }
+  .side-notes[data-span='lg'] .side-note__text {
+    font-size: 1.2rem;
+    line-height: 2.05;
+  }
+}

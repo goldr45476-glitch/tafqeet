@@ -14,7 +14,7 @@ const TONES: Record<DecorTone, string> = {
   sapphire:
     'bg-sapphire-600/[0.07] dark:bg-sapphire-400/[0.06] [--tone-rgb:34_71_103] dark:[--tone-rgb:81_131_174]',
   accent:
-    'bg-accent-400/[0.14] dark:bg-accent-400/[0.05] [--tone-rgb:123_84_32] dark:[--tone-rgb:208_160_64]',
+    'bg-accent-400/[0.085] dark:bg-accent-400/[0.05] [--tone-rgb:138_90_28] dark:[--tone-rgb:208_160_64]',
   ruby: 'bg-ruby-600/[0.06] dark:bg-ruby-400/[0.06] [--tone-rgb:114_38_57] dark:[--tone-rgb:195_95_114]',
 };
 

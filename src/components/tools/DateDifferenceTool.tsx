@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocale } from '../../i18n';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
+import SideNotes from '../SideNotes';
 import {
   calendarDiff,
   isValidDateString,
@@ -184,7 +185,7 @@ export default function DateDifferenceTool() {
 
   const segmentClass = (active: boolean) =>
     active
-      ? 'rounded bg-brand-700 px-3 py-1 text-accent-50 shadow-sm'
+      ? 'rounded-full bg-brand-700 px-3 py-1 text-accent-50 shadow-sm'
       : 'px-3 py-1 text-slate-600 dark:text-slate-400';
 
   return (
@@ -205,13 +206,13 @@ export default function DateDifferenceTool() {
             <div
               role="group"
               aria-label={locale === 'ar' ? 'نوع الحساب' : 'Calculation type'}
-              className="mb-6 inline-flex rounded-md border border-accent-400 bg-slate-100 p-1 dark:border-accent-800/60 dark:bg-white/5"
+              className="mb-6 inline-flex rounded-full border border-accent-300 bg-slate-100 p-1 dark:border-accent-800/60 dark:bg-white/5"
             >
               <button
                 type="button"
                 onClick={() => switchMode('dates')}
                 aria-pressed={mode === 'dates'}
-                className="rounded-md px-1 py-1 text-sm font-bold transition-all"
+                className="rounded-full px-1 py-1 text-sm font-semibold transition-all"
               >
                 <span className={segmentClass(mode === 'dates')}>{t.dateDifference.modeDates}</span>
               </button>
@@ -219,7 +220,7 @@ export default function DateDifferenceTool() {
                 type="button"
                 onClick={() => switchMode('times')}
                 aria-pressed={mode === 'times'}
-                className="rounded-md px-1 py-1 text-sm font-bold transition-all"
+                className="rounded-full px-1 py-1 text-sm font-semibold transition-all"
               >
                 <span className={segmentClass(mode === 'times')}>{t.dateDifference.modeTimes}</span>
               </button>
@@ -394,6 +395,7 @@ export default function DateDifferenceTool() {
             </div>
           </div>
         </div>
+        <SideNotes tool="dateDifference" />
       </div>
     </div>
   );

@@ -259,6 +259,32 @@ export const en = {
       'These are general administrative templates for convenience only — not official legal documents. Please review and adapt before formal use.',
     requiredFieldsError: 'Please fill in the required fields.',
   },
+  sideNotes: {
+    numberToWords: {
+      rightLabel: 'Why spell it out',
+      rightText: 'Writing an amount in words prevents tampering and confusion on cheques and contracts.',
+      leftLabel: 'A maxim',
+      leftText: 'Accuracy in accounts is a trust.',
+    },
+    dateDifference: {
+      rightLabel: 'A proverb',
+      rightText: 'Time is like a sword: if you do not cut it, it cuts you.',
+      leftLabel: 'Why it helps',
+      leftText: 'Knowing a span in days and hours sharpens planning and keeps appointments on track.',
+    },
+    financial: {
+      rightLabel: 'A proverb',
+      rightText: 'Save the white coin for the black day.',
+      leftLabel: 'Why it helps',
+      leftText: 'Working out tax and percentages in advance spares you surprises on the invoice.',
+    },
+    documentHelper: {
+      rightLabel: 'A proverb',
+      rightText: 'What is written endures; what is only remembered flees.',
+      leftLabel: 'Why it helps',
+      leftText: 'A ready draft in formal wording saves your time and keeps your letter dignified.',
+    },
+  },
   footer: {
     tagline: 'Smart tools for everyday administrative work.',
     toolsTitle: 'Tools',
