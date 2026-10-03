@@ -17,8 +17,8 @@
   --ink: 36 31 23;
 
   /* Eight-pointed star tile, very low contrast so it reads as texture, not pattern. */
-  --tile-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%239a6b25' stroke-opacity='0.13' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
-  --tile-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23e0bb66' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
+  --tile-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%239a6b25' stroke-opacity='0.26' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
+  --tile-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23e0bb66' stroke-opacity='0.14' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
 }
 .dark {
   color-scheme: dark;
@@ -93,35 +93,6 @@ input[type='checkbox'] {
   .glass-card {
     @apply relative rounded-lg border border-accent-300 bg-surface-card shadow-soft transition-all duration-300 dark:border-accent-800/70 dark:bg-slate-900;
   }
-  .glass-card::before {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border: 1px solid rgb(var(--gold-soft) / 0.55);
-    border-radius: 4px;
-    pointer-events: none;
-  }
-  .dark .glass-card::before {
-    border-color: rgb(var(--gold) / 0.3);
-  }
-  .glass-card::after {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    pointer-events: none;
-    --c: rgb(var(--gold));
-    background:
-      linear-gradient(var(--c), var(--c)) top left / 16px 2px,
-      linear-gradient(var(--c), var(--c)) top left / 2px 16px,
-      linear-gradient(var(--c), var(--c)) top right / 16px 2px,
-      linear-gradient(var(--c), var(--c)) top right / 2px 16px,
-      linear-gradient(var(--c), var(--c)) bottom left / 16px 2px,
-      linear-gradient(var(--c), var(--c)) bottom left / 2px 16px,
-      linear-gradient(var(--c), var(--c)) bottom right / 16px 2px,
-      linear-gradient(var(--c), var(--c)) bottom right / 2px 16px;
-    background-repeat: no-repeat;
-  }
-
   /* ---------- Buttons ---------- */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-md border border-accent-500 bg-brand-700 px-6 py-2.5 text-sm font-bold text-accent-50 transition-colors duration-200 hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 disabled:cursor-not-allowed disabled:opacity-50;
@@ -235,3 +206,72 @@ input[type='checkbox'] {
 [dir='rtl'] .ornament::after {
   --ornament-dir: right;
 }
+
+/* ===== Ornament kit (generated) ===== */
+:root {
+  --gold-rgb: 185 133 48;
+  --gold-soft-rgb: 224 187 102;
+  --tone-rgb: 18 80 67;
+}
+
+/* Frieze: a band of eight-pointed stars between two gold rules. The gold line-work and
+   the tinted star fills are two masks, so each section recolours the fills via --tone-rgb. */
+.frieze { position: relative; height: 24px; width: 100%; pointer-events: none; }
+.frieze::before,
+.frieze::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 48px 24px;
+  mask-size: 48px 24px;
+}
+.frieze::before {
+  background: rgb(var(--tone-rgb));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2224%22 viewBox=%220 0 48 24%22%3E %3Cg fill=%22%23000%22%3E %3Crect x=%2219%22 y=%227%22 width=%2210%22 height=%2210%22/%3E %3Crect x=%2219%22 y=%227%22 width=%2210%22 height=%2210%22 transform=%22rotate(45 24 12)%22/%3E %3Cpath d=%22M-2.4 12L0 9.6L2.4 12L0 14.4Z M45.6 12L48 9.6L50.4 12L48 14.4Z%22/%3E %3Ccircle cx=%2211%22 cy=%2212%22 r=%221.6%22/%3E%3Ccircle cx=%2237%22 cy=%2212%22 r=%221.6%22/%3E %3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2224%22 viewBox=%220 0 48 24%22%3E %3Cg fill=%22%23000%22%3E %3Crect x=%2219%22 y=%227%22 width=%2210%22 height=%2210%22/%3E %3Crect x=%2219%22 y=%227%22 width=%2210%22 height=%2210%22 transform=%22rotate(45 24 12)%22/%3E %3Cpath d=%22M-2.4 12L0 9.6L2.4 12L0 14.4Z M45.6 12L48 9.6L50.4 12L48 14.4Z%22/%3E %3Ccircle cx=%2211%22 cy=%2212%22 r=%221.6%22/%3E%3Ccircle cx=%2237%22 cy=%2212%22 r=%221.6%22/%3E %3C/g%3E%3C/svg%3E");
+}
+.frieze::after {
+  background: rgb(var(--gold-rgb));
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2224%22 viewBox=%220 0 48 24%22%3E %3Cg fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.4%22%3E %3Cpath d=%22M0 2.2H48M0 21.8H48%22/%3E %3Crect x=%2217%22 y=%225%22 width=%2214%22 height=%2214%22/%3E %3Crect x=%2217%22 y=%225%22 width=%2214%22 height=%2214%22 transform=%22rotate(45 24 12)%22/%3E %3Cpath d=%22M-4 12L0 8L4 12L0 16Z M44 12L48 8L52 12L48 16Z%22/%3E %3Cpath d=%22M9 12H13M35 12H39%22/%3E %3C/g%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2224%22 viewBox=%220 0 48 24%22%3E %3Cg fill=%22none%22 stroke=%22%23000%22 stroke-width=%221.4%22%3E %3Cpath d=%22M0 2.2H48M0 21.8H48%22/%3E %3Crect x=%2217%22 y=%225%22 width=%2214%22 height=%2214%22/%3E %3Crect x=%2217%22 y=%225%22 width=%2214%22 height=%2214%22 transform=%22rotate(45 24 12)%22/%3E %3Cpath d=%22M-4 12L0 8L4 12L0 16Z M44 12L48 8L52 12L48 16Z%22/%3E %3Cpath d=%22M9 12H13M35 12H39%22/%3E %3C/g%3E%3C/svg%3E");
+}
+
+/* Card: ornamental corners + one inner hairline frame. */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgb(var(--gold-soft-rgb) / 0.5);
+  border-radius: 3px;
+  pointer-events: none;
+}
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 44 44%22%3E%3Cg transform=%22%22%3E %3Cpath d=%22M2 41V7Q2 2 7 2H41%22 fill=%22none%22 stroke=%22%23b98530%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M9 31V12Q9 9 12 9H31%22 fill=%22none%22 stroke=%22%23e0bb66%22 stroke-width=%221.3%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M15 15L19.5 10.5L24 15L19.5 19.5Z%22 fill=%22%23b98530%22/%3E %3Ccircle cx=%2230.5%22 cy=%2215%22 r=%221.7%22 fill=%22%23b98530%22/%3E%3Ccircle cx=%2215%22 cy=%2230.5%22 r=%221.7%22 fill=%22%23b98530%22/%3E %3Cpath d=%22M2 2L9 2L2 9Z%22 fill=%22%23b98530%22/%3E %3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 44 44%22%3E%3Cg transform=%22translate(44 0) scale(-1 1)%22%3E %3Cpath d=%22M2 41V7Q2 2 7 2H41%22 fill=%22none%22 stroke=%22%23b98530%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M9 31V12Q9 9 12 9H31%22 fill=%22none%22 stroke=%22%23e0bb66%22 stroke-width=%221.3%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M15 15L19.5 10.5L24 15L19.5 19.5Z%22 fill=%22%23b98530%22/%3E %3Ccircle cx=%2230.5%22 cy=%2215%22 r=%221.7%22 fill=%22%23b98530%22/%3E%3Ccircle cx=%2215%22 cy=%2230.5%22 r=%221.7%22 fill=%22%23b98530%22/%3E %3Cpath d=%22M2 2L9 2L2 9Z%22 fill=%22%23b98530%22/%3E %3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 44 44%22%3E%3Cg transform=%22translate(0 44) scale(1 -1)%22%3E %3Cpath d=%22M2 41V7Q2 2 7 2H41%22 fill=%22none%22 stroke=%22%23b98530%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M9 31V12Q9 9 12 9H31%22 fill=%22none%22 stroke=%22%23e0bb66%22 stroke-width=%221.3%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M15 15L19.5 10.5L24 15L19.5 19.5Z%22 fill=%22%23b98530%22/%3E %3Ccircle cx=%2230.5%22 cy=%2215%22 r=%221.7%22 fill=%22%23b98530%22/%3E%3Ccircle cx=%2215%22 cy=%2230.5%22 r=%221.7%22 fill=%22%23b98530%22/%3E %3Cpath d=%22M2 2L9 2L2 9Z%22 fill=%22%23b98530%22/%3E %3C/g%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2264%22 height=%2264%22 viewBox=%220 0 44 44%22%3E%3Cg transform=%22translate(44 44) scale(-1 -1)%22%3E %3Cpath d=%22M2 41V7Q2 2 7 2H41%22 fill=%22none%22 stroke=%22%23b98530%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M9 31V12Q9 9 12 9H31%22 fill=%22none%22 stroke=%22%23e0bb66%22 stroke-width=%221.3%22 stroke-linecap=%22round%22/%3E %3Cpath d=%22M15 15L19.5 10.5L24 15L19.5 19.5Z%22 fill=%22%23b98530%22/%3E %3Ccircle cx=%2230.5%22 cy=%2215%22 r=%221.7%22 fill=%22%23b98530%22/%3E%3Ccircle cx=%2215%22 cy=%2230.5%22 r=%221.7%22 fill=%22%23b98530%22/%3E %3Cpath d=%22M2 2L9 2L2 9Z%22 fill=%22%23b98530%22/%3E %3C/g%3E%3C/svg%3E");
+  background-position: top left, top right, bottom left, bottom right;
+  background-size: 64px 64px;
+  background-repeat: no-repeat;
+}
+
+/* Result panel: a gilt star badge sits on the double border, top centre. */
+.result-box::before {
+  content: '';
+  position: absolute;
+  top: -22px;
+  inset-inline-start: 50%;
+  width: 40px;
+  height: 40px;
+  margin-inline-start: -20px;
+  border-radius: 50%;
+  background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E %3Cg fill=%22%23b98530%22%3E%3Crect x=%228%22 y=%228%22 width=%2224%22 height=%2224%22/%3E%3Crect x=%228%22 y=%228%22 width=%2224%22 height=%2224%22 transform=%22rotate(45 20 20)%22/%3E%3C/g%3E %3Cg fill=%22%23fbf6e5%22%3E%3Crect x=%2213.5%22 y=%2213.5%22 width=%2213%22 height=%2213%22/%3E%3Crect x=%2213.5%22 y=%2213.5%22 width=%2213%22 height=%2213%22 transform=%22rotate(45 20 20)%22/%3E%3C/g%3E %3Ccircle cx=%2220%22 cy=%2220%22 r=%223.4%22 fill=%22%23b98530%22/%3E%3C/svg%3E") center / 40px 40px no-repeat, var(--badge-bg, #fbf6e5);
+}
+
+.dark .result-box { --badge-bg: #241f17; }
+.dark .glass-card::before { border-color: rgb(var(--gold-rgb) / 0.3); }
