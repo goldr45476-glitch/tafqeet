@@ -181,7 +181,7 @@ export default function DocumentHelperTool() {
 
           <div className="lg:col-span-3">
             <div className="result-box min-h-[320px]" data-print-area="true">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+              <h2 className="text-xl font-bold text-brand-800 dark:text-accent-200">
                 {t.documentHelper.resultTitle}
               </h2>
 

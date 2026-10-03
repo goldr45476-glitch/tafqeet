@@ -166,7 +166,12 @@ export default function CurrencySelect({ id, value, onChange, compact = false }:
                   } ${isSelected ? 'font-bold' : ''}`}
                 >
                   <span className="truncate">
-                    {isSelected && <span className="me-2 text-accent-600 dark:text-accent-300">◆</span>}
+                    {isSelected && (
+                      <span
+                        aria-hidden="true"
+                        className="me-2 inline-block h-2 w-2 rotate-45 select-none bg-accent-600 align-middle dark:bg-accent-300"
+                      />
+                    )}
                     {nameOf(c)}
                   </span>
                   <span dir="ltr" className="shrink-0 font-mono text-xs text-slate-500 dark:text-slate-400">

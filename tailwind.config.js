@@ -5,9 +5,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Noto Naskh Arabic"', '"Lora"', 'Georgia', 'serif'],
-        arabic: ['"Noto Naskh Arabic"', '"Amiri"', 'serif'],
-        display: ['"Amiri"', '"Lora"', 'Georgia', 'serif'],
+        sans: ['"Lora"', '"Noto Naskh Arabic"', '"Traditional Arabic"', 'Georgia', 'serif'],
+        arabic: ['"Noto Naskh Arabic"', '"Amiri"', '"Traditional Arabic"', '"Times New Roman"', 'serif'],
+        display: ['"Amiri"', '"Cormorant Garamond"', '"Traditional Arabic"', 'Georgia', 'serif'],
       },
       colors: {
         // Warm "parchment" neutrals replace the cold blue-grey slate so every

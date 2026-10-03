@@ -142,7 +142,7 @@ export default function DateDifferenceTool() {
             </div>
 
             <div className="mt-8 border-t border-slate-100 pt-6 dark:border-white/10">
-              <h3 className="text-xs font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <h3 className="text-sm font-bold text-slate-600 dark:text-slate-400">
                 {t.dateDifference.useCasesTitle}
               </h3>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -160,7 +160,7 @@ export default function DateDifferenceTool() {
 
           <div className="lg:col-span-3">
             <div className="result-box">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+              <h2 className="text-xl font-bold text-brand-800 dark:text-accent-200">
                 {t.dateDifference.resultTitle}
               </h2>
 
