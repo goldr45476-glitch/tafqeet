@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Tafqeit — classic "manuscript" theme.
+  Warm parchment surfaces, deep emerald + antique gold, framed cards with
+  fine double rules and corner brackets, serif display type, and a faint
+  eight-pointed-star (Islamic geometric) tile on the page background.
+*/
+
 :root {
   color-scheme: light;
+  --gold: 185 133 48;
+  --gold-soft: 224 187 102;
+  --emerald: 23 102 82;
+  --ink: 36 31 23;
+
+  /* Eight-pointed star tile, very low contrast so it reads as texture, not pattern. */
+  --tile-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%239a6b25' stroke-opacity='0.13' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
+  --tile-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23e0bb66' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='18' y='18' width='36' height='36'/%3E%3Crect x='18' y='18' width='36' height='36' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='6'/%3E%3Cpath d='M0 0l6 6M72 0l-6 6M0 72l6-6M72 72l-6-6'/%3E%3C/g%3E%3C/svg%3E");
 }
 .dark {
   color-scheme: dark;
@@ -17,8 +32,13 @@ body,
 
 body {
   @apply bg-surface-light text-slate-800 antialiased dark:bg-surface-dark dark:text-slate-100;
-  font-feature-settings: 'cv11', 'ss01';
+  background-image: var(--tile-light);
+  background-size: 72px 72px;
   overflow-x: hidden;
+  line-height: 1.7;
+}
+.dark body {
+  background-image: var(--tile-dark);
 }
 
 html[lang='ar'] body {
@@ -28,71 +48,166 @@ html[lang='en'] body {
   @apply font-sans;
 }
 
+/* Serif display type for every heading. */
+h1,
+h2,
+h3,
+.font-display {
+  @apply font-display;
+}
+h1,
+h2 {
+  letter-spacing: 0;
+}
+
 ::selection {
-  @apply bg-brand-400/30 text-inherit;
+  @apply bg-accent-300/50 text-inherit;
+}
+
+input[type='checkbox'] {
+  accent-color: #176652;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  @apply bg-slate-100 dark:bg-slate-900;
 }
 ::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-slate-300/70 dark:bg-slate-700/70;
+  @apply rounded-sm border-2 border-solid border-slate-100 bg-accent-400/70 dark:border-slate-900 dark:bg-accent-700/70;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400/80 dark:bg-slate-600/80;
+  @apply bg-accent-500;
 }
 
 @layer components {
-  .glass-panel {
-    @apply border border-white/60 bg-white/70 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-slate-900/60;
-  }
-
-  .glass-card {
-    @apply relative overflow-hidden rounded-3xl border border-white/60 bg-white/80 shadow-soft backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-slate-900/70;
-  }
-
   .section-container {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* ---------- Framed card: outer rule + inset rule + gold corner brackets ---------- */
+  .glass-panel,
+  .glass-card {
+    @apply relative rounded-lg border border-accent-300 bg-surface-card shadow-soft transition-all duration-300 dark:border-accent-800/70 dark:bg-slate-900;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgb(var(--gold-soft) / 0.55);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .dark .glass-card::before {
+    border-color: rgb(var(--gold) / 0.3);
+  }
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    pointer-events: none;
+    --c: rgb(var(--gold));
+    background:
+      linear-gradient(var(--c), var(--c)) top left / 16px 2px,
+      linear-gradient(var(--c), var(--c)) top left / 2px 16px,
+      linear-gradient(var(--c), var(--c)) top right / 16px 2px,
+      linear-gradient(var(--c), var(--c)) top right / 2px 16px,
+      linear-gradient(var(--c), var(--c)) bottom left / 16px 2px,
+      linear-gradient(var(--c), var(--c)) bottom left / 2px 16px,
+      linear-gradient(var(--c), var(--c)) bottom right / 16px 2px,
+      linear-gradient(var(--c), var(--c)) bottom right / 2px 16px;
+    background-repeat: no-repeat;
+  }
+
+  /* ---------- Buttons ---------- */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-accent-500 bg-brand-700 px-6 py-2.5 text-sm font-bold text-accent-50 transition-colors duration-200 hover:bg-brand-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 disabled:cursor-not-allowed disabled:opacity-50;
+    box-shadow:
+      inset 0 0 0 2px rgb(var(--emerald)),
+      inset 0 0 0 3px rgb(var(--gold-soft) / 0.6),
+      0 2px 0 #0c352c;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/80 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-brand-400/50 dark:hover:text-brand-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-accent-400 bg-surface-card px-6 py-2.5 text-sm font-bold text-brand-800 transition-colors duration-200 hover:border-brand-600 hover:bg-accent-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 dark:border-accent-700/70 dark:bg-slate-800 dark:text-accent-200 dark:hover:bg-slate-700;
+    box-shadow: 0 2px 0 rgb(var(--gold) / 0.35);
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 dark:text-slate-300 dark:hover:bg-white/10;
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-accent-100/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 dark:text-slate-300 dark:hover:bg-white/10;
   }
 
+  /* ---------- Fields: cream "form line" with an inner gilt rule ---------- */
   .field-label {
-    @apply mb-1.5 block text-sm font-medium text-slate-600 dark:text-slate-300;
+    @apply mb-1.5 block text-sm font-bold text-brand-800 dark:text-accent-200;
   }
 
   .field-input {
-    @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-base text-slate-800 shadow-sm outline-none transition-all placeholder:text-slate-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100 dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-brand-500 dark:focus:ring-brand-900/40;
+    @apply w-full rounded-md border-[1.5px] border-accent-400 bg-white px-4 py-2.5 text-base text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:border-brand-600 dark:border-accent-700/70 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:border-accent-400;
+    box-shadow:
+      inset 0 0 0 3px #fffcf4,
+      inset 0 0 0 4px rgb(var(--gold-soft) / 0.55),
+      inset 0 2px 5px 4px rgb(74 52 20 / 0.04);
+  }
+  .dark .field-input {
+    box-shadow:
+      inset 0 0 0 3px #241f17,
+      inset 0 0 0 4px rgb(var(--gold) / 0.3);
+  }
+  .field-input:focus {
+    box-shadow:
+      inset 0 0 0 3px #fffcf4,
+      inset 0 0 0 4px rgb(var(--emerald) / 0.8),
+      0 0 0 3px rgb(var(--gold-soft) / 0.45);
   }
 
   .field-select {
-    @apply field-input cursor-pointer;
+    @apply field-input cursor-pointer appearance-none;
+    padding-inline-end: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1 L12 7 L7 13 L2 7 Z' fill='%23b98530'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+    background-position: right 0.95rem center;
+  }
+  [dir='rtl'] .field-select {
+    background-position: left 0.95rem center;
   }
 
   .chip-toggle {
-    @apply inline-flex cursor-pointer select-none items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition-all hover:border-brand-300 dark:border-white/10 dark:bg-slate-800/60 dark:text-slate-300;
+    @apply inline-flex cursor-pointer select-none items-center gap-2 rounded-md border border-accent-400 bg-surface-card px-4 py-2 text-sm font-bold text-brand-800 transition-colors hover:bg-accent-50 dark:border-accent-700/70 dark:bg-slate-800 dark:text-accent-200;
   }
   .chip-toggle[data-active='true'] {
-    @apply border-transparent bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-soft;
+    @apply border-accent-500 bg-brand-700 text-accent-50;
   }
 
+  /* ---------- Result: gilt certificate panel ---------- */
   .result-box {
-    @apply relative rounded-3xl border border-brand-100 bg-gradient-to-br from-brand-50 via-white to-accent-50 p-6 shadow-soft dark:border-brand-900/40 dark:from-brand-950/40 dark:via-slate-900/60 dark:to-accent-950/20;
+    @apply relative rounded-md bg-accent-50 p-6 pt-7 dark:bg-slate-900;
+    border: 4px double rgb(var(--gold));
+    box-shadow:
+      0 8px 22px -12px rgb(74 52 20 / 0.45),
+      inset 0 0 0 1px rgb(var(--gold-soft) / 0.5);
+  }
+  .dark .result-box {
+    border-color: rgb(var(--gold) / 0.6);
+  }
+
+  /* ---------- Ornamental divider (line – diamond – line) ---------- */
+  .ornament {
+    @apply flex items-center justify-center gap-3 text-accent-500;
+  }
+  .ornament::before,
+  .ornament::after {
+    content: '';
+    height: 1px;
+    width: 4.5rem;
+    background: linear-gradient(to var(--ornament-dir, right), transparent, currentColor);
+  }
+  .ornament::after {
+    --ornament-dir: left;
   }
 }
 
@@ -112,4 +227,11 @@ html[lang='en'] body {
   .no-print {
     display: none !important;
   }
+}
+
+[dir='rtl'] .ornament::before {
+  --ornament-dir: left;
+}
+[dir='rtl'] .ornament::after {
+  --ornament-dir: right;
 }

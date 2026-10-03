@@ -41,12 +41,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={toast.id}
             role="status"
-            className={`animate-toastIn pointer-events-auto flex items-center gap-2 rounded-2xl border px-4 py-2.5 text-sm font-medium shadow-glow backdrop-blur-xl ${
+            className={`animate-toastIn pointer-events-auto flex items-center gap-2 rounded-md border-2 px-4 py-2.5 text-sm font-bold shadow-soft ${
               toast.variant === 'success'
-                ? 'border-accent-300/50 bg-accent-500/95 text-white dark:border-accent-400/30'
+                ? 'border-accent-400 bg-brand-700 text-accent-50'
                 : toast.variant === 'error'
-                  ? 'border-red-300/50 bg-red-500/95 text-white'
-                  : 'border-brand-300/50 bg-brand-500/95 text-white'
+                  ? 'border-accent-400 bg-ruby-700 text-accent-50'
+                  : 'border-accent-400 bg-slate-800 text-accent-50'
             }`}
           >
             {toast.variant === 'success' && (

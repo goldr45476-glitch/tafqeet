@@ -26,26 +26,24 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-    `rounded-xl px-3.5 py-2 text-sm font-medium transition-colors ${
+    `rounded-md px-3.5 py-2 text-sm font-bold transition-colors ${
       isActive
-        ? 'bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-300'
-        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
+        ? 'bg-accent-100 text-brand-800 dark:bg-white/10 dark:text-accent-200'
+        : 'text-slate-600 hover:bg-accent-50 hover:text-brand-800 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-accent-200'
     }`;
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-slate-200/70 bg-white/80 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/80'
-          : 'border-b border-transparent bg-transparent'
+      className={`sticky top-0 z-50 border-b-2 border-accent-500/70 bg-surface-card transition-shadow duration-300 dark:border-accent-700/60 dark:bg-slate-950 ${
+        scrolled ? 'shadow-soft' : ''
       }`}
     >
       <nav className="section-container flex h-16 items-center justify-between gap-4" aria-label="Main navigation">
         <NavLink to="/" className="flex items-center gap-2.5 shrink-0">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white shadow-soft">
+          <span className="flex h-9 w-9 items-center justify-center rounded-md border border-accent-500 bg-brand-700 text-accent-100 shadow-soft">
             <IconLogoMark className="h-[18px] w-[18px]" />
           </span>
-          <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">{t.common.appName}</span>
+          <span className="font-display text-2xl font-bold text-brand-800 dark:text-accent-100">{t.common.appName}</span>
         </NavLink>
 
         <div className="hidden items-center gap-1 lg:flex">
@@ -99,7 +97,7 @@ export default function Navbar() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-slate-200/70 bg-white/95 px-4 py-3 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/95 lg:hidden">
+        <div className="border-t border-accent-300 bg-surface-card px-4 py-3 dark:border-accent-800/60 dark:bg-slate-950 lg:hidden">
           <div className="flex flex-col gap-1">
             <NavLink to="/" end className={navLinkClass}>
               {t.nav.home}

@@ -9,14 +9,14 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-slate-200/70 bg-white/60 dark:border-white/10 dark:bg-slate-950/60">
+    <footer className="relative border-t-2 border-accent-500/70 bg-surface-card dark:border-accent-700/60 dark:bg-slate-950">
       <div className="section-container grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-accent-500 text-white shadow-soft">
+            <span className="flex h-9 w-9 items-center justify-center rounded-md border border-accent-500 bg-brand-700 text-accent-100 shadow-soft">
               <IconLogoMark className="h-[18px] w-[18px]" />
             </span>
-            <span className="text-lg font-bold text-slate-900 dark:text-white">{t.common.appName}</span>
+            <span className="font-display text-2xl font-bold text-brand-800 dark:text-accent-100">{t.common.appName}</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-6 text-slate-500 dark:text-slate-400">{t.footer.tagline}</p>
           <div className="mt-4 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">

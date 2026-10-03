@@ -23,8 +23,9 @@ function parseNum(value: string): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
-function fmt(n: number, locale: string): string {
-  return n.toLocaleString(locale === 'ar' ? 'ar-EG' : 'en-US', { maximumFractionDigits: 4 });
+/** Always Western (0-9) digits with "," thousands and "." decimals, in every UI language. */
+function fmt(n: number, _locale?: string): string {
+  return n.toLocaleString('en-US', { maximumFractionDigits: 4 });
 }
 
 function ResultTile({ label, value, highlight = false }: { label: string; value: string; highlight?: boolean }) {
@@ -372,10 +373,11 @@ export default function FinancialCalculatorTool() {
 
   return (
     <div className="relative overflow-hidden py-14 sm:py-20">
-      <BackgroundDecor variant="compact" />
+      <BackgroundDecor tone="accent" />
 
       <div className="section-container">
         <PageHeader
+          tone="text-accent-700"
           eyebrow={t.nav.tools}
           title={t.financial.title}
           subtitle={t.financial.subtitle}

@@ -26,7 +26,7 @@ function StandaloneLink({ path }: { path: string }) {
     <div className="section-container flex justify-end pb-0 pt-3">
       <Link
         to={path}
-        className="inline-flex items-center gap-1 text-xs font-medium text-slate-400 transition-colors hover:text-brand-600 dark:text-slate-500 dark:hover:text-brand-400"
+        className="inline-flex items-center gap-1 text-xs font-bold text-slate-500 transition-colors hover:text-brand-700 dark:text-slate-400 dark:hover:text-accent-300"
       >
         {t.home.openStandalone}
         <IconArrowEnd className={`h-3 w-3 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
@@ -81,7 +81,7 @@ export default function HomePage() {
         not decoration. No hero copy above it: the first tool must be
         usable the instant the page loads, with zero scrolling or reading.
       */}
-      <div className="sticky top-16 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/95">
+      <div className="sticky top-16 z-40 border-b border-accent-300 bg-slate-100 dark:border-accent-800/60 dark:bg-slate-900">
         <nav
           className="section-container flex items-center justify-center gap-0.5 overflow-x-auto sm:gap-1"
           aria-label={t.home.quickNavLabel}
@@ -96,16 +96,16 @@ export default function HomePage() {
                 type="button"
                 onClick={() => scrollToSection(sectionId)}
                 aria-current={isActive ? 'true' : undefined}
-                className={`relative flex shrink-0 items-center gap-2 whitespace-nowrap px-3.5 py-3.5 text-sm font-semibold transition-colors sm:px-4 ${
+                className={`relative flex shrink-0 items-center gap-2 whitespace-nowrap px-3.5 py-3.5 text-sm font-bold transition-colors sm:px-4 ${
                   isActive
-                    ? 'text-brand-700 dark:text-brand-300'
-                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
+                    ? 'text-brand-800 dark:text-accent-200'
+                    : 'text-slate-600 hover:text-brand-800 dark:text-slate-400 dark:hover:text-accent-200'
                 }`}
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 {t.nav[tool.id]}
                 <span
-                  className={`absolute inset-x-2.5 -bottom-px h-0.5 rounded-full bg-gradient-to-r from-brand-600 to-brand-500 transition-opacity ${
+                  className={`absolute inset-x-2.5 -bottom-px h-[3px] bg-accent-500 transition-opacity ${
                     isActive ? 'opacity-100' : 'opacity-0'
                   }`}
                 />

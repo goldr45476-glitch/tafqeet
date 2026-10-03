@@ -81,10 +81,11 @@ export default function DateDifferenceTool() {
 
   return (
     <div className="relative overflow-hidden py-14 sm:py-20">
-      <BackgroundDecor variant="compact" />
+      <BackgroundDecor tone="sapphire" />
 
       <div className="section-container">
         <PageHeader
+          tone="text-sapphire-700"
           eyebrow={t.nav.tools}
           title={t.dateDifference.title}
           subtitle={t.dateDifference.subtitle}
@@ -180,7 +181,7 @@ export default function DateDifferenceTool() {
                         className="rounded-2xl border border-white/70 bg-white/70 p-5 text-center shadow-sm dark:border-white/10 dark:bg-white/5"
                       >
                         <p className="text-2xl font-bold text-brand-700 dark:text-brand-300">
-                          {item.value.toLocaleString(locale === 'ar' ? 'ar-EG' : 'en-US')}
+                          {item.value.toLocaleString('en-US')}
                         </p>
                         <p className="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">{item.label}</p>
                       </div>

@@ -7,7 +7,12 @@ export interface ToolMeta {
   id: ToolId;
   path: string;
   icon: ComponentType<IconProps>;
-  gradient: string;
+  /** Solid fill for the tool's icon tile / accents. */
+  solid: string;
+  /** Page-section tint (see BackgroundDecor). */
+  tone: 'brand' | 'sapphire' | 'accent' | 'ruby';
+  /** Text colour used for the star medallion fill in the page header. */
+  medallion: string;
 }
 
 export const TOOLS: ToolMeta[] = [
@@ -15,25 +20,33 @@ export const TOOLS: ToolMeta[] = [
     id: 'numberToWords',
     path: '/tools/number-to-words',
     icon: IconTafqeet,
-    gradient: 'from-brand-500 to-brand-700',
+    solid: 'bg-brand-700',
+    tone: 'brand',
+    medallion: 'text-brand-700',
   },
   {
     id: 'dateDifference',
     path: '/tools/date-difference',
     icon: IconDateDiff,
-    gradient: 'from-violet-500 to-violet-700',
+    solid: 'bg-sapphire-700',
+    tone: 'sapphire',
+    medallion: 'text-sapphire-700',
   },
   {
     id: 'financialCalculator',
     path: '/tools/financial-calculator',
     icon: IconFinancial,
-    gradient: 'from-amber-500 to-orange-600',
+    solid: 'bg-accent-700',
+    tone: 'accent',
+    medallion: 'text-accent-700',
   },
   {
     id: 'documentHelper',
     path: '/tools/document-helper',
     icon: IconDocument,
-    gradient: 'from-rose-500 to-rose-700',
+    solid: 'bg-ruby-700',
+    tone: 'ruby',
+    medallion: 'text-ruby-700',
   },
 ];
 

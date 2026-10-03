@@ -5,8 +5,8 @@ import { useToast } from '../../hooks/useToast';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
 import CopyButton from '../CopyButton';
+import CurrencySelect from '../CurrencySelect';
 import {
-  CURRENCIES,
   DEFAULT_CURRENCY_CODE,
   convertNumberToWords,
   getCurrency,
@@ -142,10 +142,11 @@ export default function NumberToWordsTool() {
 
   return (
     <div className="relative overflow-hidden py-14 sm:py-20">
-      <BackgroundDecor variant="compact" />
+      <BackgroundDecor tone="brand" />
 
       <div className="section-container">
         <PageHeader
+          tone="text-brand-700"
           eyebrow={t.nav.tools}
           title={t.numberToWords.title}
           subtitle={t.numberToWords.subtitle}
@@ -155,17 +156,17 @@ export default function NumberToWordsTool() {
         <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-5">
           {/* ---------------- Form ---------------- */}
           <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 lg:col-span-3">
-            <div className="mb-6 inline-flex rounded-2xl border border-slate-200 bg-slate-50 p-1 dark:border-white/10 dark:bg-white/5">
+            <div className="mb-6 inline-flex rounded-md border border-accent-400 bg-slate-100 p-1 dark:border-accent-800/60 dark:bg-white/5">
               <button
                 type="button"
                 onClick={() => setMode('currency')}
-                className="rounded-xl px-4 py-2 text-sm font-semibold transition-all"
+                className="rounded-md px-1.5 py-1 text-sm font-bold transition-all"
               >
                 <span
                   className={
                     mode === 'currency'
-                      ? 'rounded-xl bg-white px-1 text-brand-700 shadow-sm dark:bg-slate-800 dark:text-brand-300'
-                      : 'px-1 text-slate-500 dark:text-slate-400'
+                      ? 'rounded bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
+                      : 'px-2 py-1 text-slate-600 dark:text-slate-400'
                   }
                 >
                   {t.numberToWords.modeCurrency}
@@ -174,13 +175,13 @@ export default function NumberToWordsTool() {
               <button
                 type="button"
                 onClick={() => setMode('plain')}
-                className="rounded-xl px-4 py-2 text-sm font-semibold transition-all"
+                className="rounded-md px-1.5 py-1 text-sm font-bold transition-all"
               >
                 <span
                   className={
                     mode === 'plain'
-                      ? 'rounded-xl bg-white px-1 text-brand-700 shadow-sm dark:bg-slate-800 dark:text-brand-300'
-                      : 'px-1 text-slate-500 dark:text-slate-400'
+                      ? 'rounded bg-brand-700 px-2 py-1 text-accent-50 shadow-sm'
+                      : 'px-2 py-1 text-slate-600 dark:text-slate-400'
                   }
                 >
                   {t.numberToWords.modePlain}
@@ -215,18 +216,7 @@ export default function NumberToWordsTool() {
                   <label className="field-label" htmlFor="ntw-currency">
                     {t.numberToWords.currencyLabel}
                   </label>
-                  <select
-                    id="ntw-currency"
-                    className="field-select"
-                    value={currencyCode}
-                    onChange={(e) => setCurrencyCode(e.target.value)}
-                  >
-                    {CURRENCIES.map((c) => (
-                      <option key={c.code} value={c.code}>
-                        {locale === 'ar' ? c.nameAr : c.nameEn} ({c.code})
-                      </option>
-                    ))}
-                  </select>
+                  <CurrencySelect id="ntw-currency" value={currencyCode} onChange={setCurrencyCode} />
                 </div>
               )}
 
@@ -316,14 +306,14 @@ export default function NumberToWordsTool() {
           {/* ---------------- Result ---------------- */}
           <div className="lg:col-span-2">
             <div className="result-box min-h-[220px]">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-brand-700 dark:text-brand-300">
+              <h2 className="text-xl font-bold text-brand-800 dark:text-accent-200">
                 {t.numberToWords.resultTitle}
               </h2>
 
               {outcome?.success ? (
                 <p
                   dir={displayLanguage === 'ar' ? 'rtl' : 'ltr'}
-                  className="mt-4 text-xl font-bold leading-9 text-slate-900 dark:text-white sm:text-2xl"
+                  className="mt-4 font-display text-2xl font-bold leading-[2.4rem] text-slate-900 dark:text-accent-50 sm:text-[1.7rem]"
                 >
                   {primaryWords}
                 </p>
@@ -353,7 +343,7 @@ export default function NumberToWordsTool() {
             {/* ---------------- Recent conversions ---------------- */}
             <div className="glass-card no-print mt-6 p-6">
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h3 className="text-lg font-bold text-brand-800 dark:text-accent-200">
                   {t.numberToWords.recentConversionsTitle}
                 </h3>
                 {history.length > 0 && (
@@ -377,7 +367,7 @@ export default function NumberToWordsTool() {
                       <button
                         type="button"
                         onClick={() => handleReuseEntry(entry)}
-                        className="w-full rounded-xl border border-slate-100 bg-slate-50/60 px-3.5 py-2.5 text-start text-xs transition-colors hover:border-brand-200 hover:bg-brand-50/60 dark:border-white/5 dark:bg-white/5 dark:hover:border-brand-800/50 dark:hover:bg-brand-500/10"
+                        className="w-full rounded-md border border-accent-200 bg-slate-50 px-3.5 py-2.5 text-start text-xs transition-colors hover:border-accent-500 hover:bg-accent-50 dark:border-white/10 dark:bg-white/5 dark:hover:border-accent-600/60 dark:hover:bg-white/10"
                       >
                         <span className="font-mono font-semibold text-slate-700 dark:text-slate-200" dir="ltr">
                           {entry.rawValue}

@@ -3,13 +3,14 @@ import { useLocale } from '../../i18n';
 import BackgroundDecor from '../BackgroundDecor';
 import PageHeader from '../PageHeader';
 import CopyButton from '../CopyButton';
+import CurrencySelect from '../CurrencySelect';
 import {
   DOCUMENT_TEMPLATES,
   getDocumentTemplate,
   type DocumentCategory,
   type FieldValues,
 } from '../../data/documentTemplates';
-import { CURRENCIES, DEFAULT_CURRENCY_CODE } from '../../utils/numberToWordsEngine';
+import { DEFAULT_CURRENCY_CODE } from '../../utils/numberToWordsEngine';
 import { todayISO } from '../../utils/dateUtils';
 import { IconDocument, IconInfo, IconPrinter } from '../icons';
 
@@ -63,10 +64,11 @@ export default function DocumentHelperTool() {
 
   return (
     <div className="relative overflow-hidden py-14 sm:py-20">
-      <BackgroundDecor variant="compact" />
+      <BackgroundDecor tone="ruby" />
 
       <div className="section-container">
         <PageHeader
+          tone="text-ruby-700"
           eyebrow={t.nav.tools}
           title={t.documentHelper.title}
           subtitle={t.documentHelper.subtitle}
@@ -122,18 +124,12 @@ export default function DocumentHelperTool() {
                         <label className="field-label" htmlFor="doc-field-currency">
                           {t.documentHelper.fields.currency}
                         </label>
-                        <select
+                        <CurrencySelect
                           id="doc-field-currency"
-                          className="field-select"
+                          compact
                           value={values.currency ?? DEFAULT_CURRENCY_CODE}
-                          onChange={(e) => handleFieldChange('currency', e.target.value)}
-                        >
-                          {CURRENCIES.map((c) => (
-                            <option key={c.code} value={c.code}>
-                              {c.code}
-                            </option>
-                          ))}
-                        </select>
+                          onChange={(code) => handleFieldChange('currency', code)}
+                        />
                       </div>
                     </div>
                   );
