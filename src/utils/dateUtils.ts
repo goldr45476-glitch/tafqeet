@@ -106,3 +106,99 @@ export function calendarDiff(dateA: Date, dateB: Date): CalendarDiff {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Time-of-day math (hours / minutes / seconds, no calendar involved)
+// ---------------------------------------------------------------------------
+
+const SECONDS_PER_DAY = 24 * 60 * 60;
+
+/** Maps Arabic-Indic and Persian digits to 0-9 so people can type in either. */
+export function normalizeDigits(value: string): string {
+  return value
+    .replace(/[\u0660-\u0669]/g, (d) => String(d.charCodeAt(0) - 0x0660))
+    .replace(/[\u06f0-\u06f9]/g, (d) => String(d.charCodeAt(0) - 0x06f0));
+}
+
+/**
+ * Parses a typed time of day into seconds since midnight.
+ * Accepts 24-hour ("14:30", "14:30:15", "8") and 12-hour with an AM/PM marker in
+ * English or Arabic ("2:30 pm", "2:30 م", "9 ص"). Returns null when invalid.
+ */
+export function parseTimeInput(value: string): number | null {
+  const cleaned = normalizeDigits(value).trim().toLowerCase().replace(/\s+/g, ' ');
+  const match =
+    /^(\d{1,2})(?:[:.](\d{1,2}))?(?:[:.](\d{1,2}))?\s*(a\.?m\.?|p\.?m\.?|ص|صباحا|صباحًا|م|مساء|مساءً|مساءا)?$/.exec(
+      cleaned,
+    );
+  if (!match) return null;
+
+  let hours = Number(match[1]);
+  const minutes = match[2] === undefined ? 0 : Number(match[2]);
+  const seconds = match[3] === undefined ? 0 : Number(match[3]);
+  const marker = match[4];
+
+  if (minutes > 59 || seconds > 59) return null;
+
+  if (marker) {
+    const isPm = marker.startsWith('p') || marker === 'م' || marker.startsWith('مساء');
+    if (hours < 1 || hours > 12) return null;
+    if (isPm) {
+      if (hours !== 12) hours += 12;
+    } else if (hours === 12) {
+      hours = 0;
+    }
+  } else if (hours > 23) {
+    return null;
+  }
+
+  return hours * 3600 + minutes * 60 + seconds;
+}
+
+export interface TimeDiff {
+  hours: number;
+  minutes: number;
+  seconds: number;
+  totalSeconds: number;
+  /** Rounded to 2 decimal places. */
+  totalMinutes: number;
+  /** Rounded to 2 decimal places. */
+  totalHours: number;
+  /** True when the end time was treated as falling on the next day. */
+  crossedMidnight: boolean;
+  /** True when the two times were swapped because the end was earlier. */
+  swapped: boolean;
+}
+
+/**
+ * Elapsed time between two times of day. When the end is earlier than the start
+ * it is either read as the next day (`overnight`, e.g. a 22:00 -> 06:00 shift is
+ * 8 hours) or the two times are swapped, as the date calculator does.
+ */
+export function timeDiff(startSeconds: number, endSeconds: number, overnight = true): TimeDiff {
+  let a = startSeconds;
+  let b = endSeconds;
+  let crossedMidnight = false;
+  let swapped = false;
+
+  if (b < a) {
+    if (overnight) {
+      b += SECONDS_PER_DAY;
+      crossedMidnight = true;
+    } else {
+      [a, b] = [b, a];
+      swapped = true;
+    }
+  }
+
+  const total = b - a;
+  return {
+    hours: Math.floor(total / 3600),
+    minutes: Math.floor((total % 3600) / 60),
+    seconds: total % 60,
+    totalSeconds: total,
+    totalMinutes: Math.round((total / 60) * 100) / 100,
+    totalHours: Math.round((total / 3600) * 100) / 100,
+    crossedMidnight,
+    swapped,
+  };
+}
